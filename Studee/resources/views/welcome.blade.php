@@ -364,7 +364,7 @@
                 <h1 class="mb-6 text-4xl font-bold tracking-tighter text-heading md:text-5xl lg:text-6xl">Got any questions? We got you</h1>
                 <p class="mb-8 text-base font-normal text-body md:text-xl">These are some of the most frequently asked questions about Studee. You can browse through them to learn more about how Studee works, its features, and how it can help improve your learning experience.</p>
                 <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 md:space-x-4">
-                    <button type="button" class="inline-flex items-center justify-center text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium rounded-base text-base px-5 py-3 focus:outline-none">
+                    <button type="button" class="inline-flex items-center justify-center text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-200 shadow-xs font-medium rounded-base text-base px-5 py-3 focus:outline-none">
                         Contact Us
                         <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
@@ -465,11 +465,11 @@
     </section>
     <!-- CALL TO ACTION -->
     <section class="bg-neutral-primary px-[15px]">
-        <div class="py-8 max-w-screen-xl rounded-3xl bg-gradient-to-r from-[rgba(46,16,101,0.95)] via-[rgba(88,28,135,0.6)] to-[rgba(216,180,254,0.4)] px-4 mx-auto max-w-screen-2xl text-center lg:py-20">
-            <h1 class="mb-6 text-4xl font-bold tracking-tighter text-heading md:text-5xl lg:text-6xl">We invest in the world’s potential</h1>
-            <p class="mb-8 text-base font-normal text-body md:text-xl">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
+        <div class="py-8 max-w-screen-xl rounded-3xl bg-[#2E1065] px-4 mx-auto max-w-screen-2xl text-center lg:py-20">
+            <h1 class="mb-6 text-4xl font-bold tracking-tighter text-white text-heading md:text-5xl lg:text-6xl">Make Your Learning Effortless</h1>
+            <p class="mb-8 text-gray-400 font-normal text-body md:text-xl">Upload your notes and files or use a prompt to generate quizzes instantly, and study smarter with tools designed to make learning easier.</p>
             <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 md:space-x-4">
-                <button type="button" class="inline-flex items-center justify-center text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium rounded-base text-base px-5 py-3 focus:outline-none">
+                <button type="button" class="inline-flex items-center justify-center text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-200 shadow-xs font-medium rounded-base text-base px-5 py-3 focus:outline-none">
                     Getting started
                     <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
