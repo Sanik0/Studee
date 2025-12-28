@@ -141,15 +141,14 @@
                     Prompt
                 </div>
             </div>
-        </div>      
+        </div>
         <div class="bg-gradient-to-b from-white to-transparent dark:from-purple-300 w-full h-full absolute top-0 left-0 z-0"></div>
     </section>
     <!-- UPLOADS -->
     <section class="w-full justify-center align-center flex px-[15px] py-[50px]">
         <form action="" class="w-full max-w-screen-sm gap-[20px] justify-center items-end flex flex-col">
             <!-- FILE UPLOAD -->
-
-            <div class="flex items-center justify-center w-full">
+            <!-- <div class="flex items-center justify-center w-full">
                 <div class="flex flex-col items-center justify-center w-full h-64 bg-neutral-secondary-medium border border-dashed border-purple-600 rounded-base">
                     <div class="flex flex-col items-center justify-center text-body pt-5 pb-6">
                         <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -157,7 +156,6 @@
                         </svg>
                         <p class="mb-2 text-sm">Click the button below to upload</p>
                         <p class="text-xs mb-4">Max. File Size: <span class="font-semibold">30MB</span></p>
-                        <!-- Upload Button -->
                         <button type="button" onclick="document.getElementById('dropzone-file-2').click()" class="inline-flex items-center text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none">
                             <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
@@ -165,11 +163,14 @@
                             Browse file
                         </button>
                     </div>
-                </div>
-                <!-- Hidden File Input (Outside Label) -->
+                </div> 
                 <input id="dropzone-file-2" type="file" class="hidden" />
-            </div>
-
+            </div> -->
+            <!-- PROMPT -->
+            <textarea id="prompt" rows="4" class="bg-neutral-secondary-medium border border-purple-400 text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 resize-none h-[250px] block w-full p-3.5 shadow-xs placeholder:text-body" placeholder="Generate a computer science quiz focusing on fundamentals such as algorithms, data structures, programming concepts, and basic computer systems. "></textarea>
+            <p class="mt-2 text-sm text-gray-500">
+                <span id="count">0</span> / 300
+            </p>
             <button disabled type="button" class="inline-flex w-fit items-center disabled:bg-purple-800 disabled:cursor-not-allowed text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                 Next Step
                 <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -180,5 +181,18 @@
     </section>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+<script>
+    const textarea = document.getElementById('prompt');
+    const counter = document.getElementById('count');
+    const maxChars = 300;
+
+    textarea.addEventListener('input', () => {
+        if (textarea.value.length > maxChars) {
+            textarea.value = textarea.value.slice(0, maxChars);
+        }
+
+        counter.textContent = textarea.value.length;
+    });
+</script>
 
 </html>
