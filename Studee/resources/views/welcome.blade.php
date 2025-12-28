@@ -121,7 +121,7 @@
         </div>
     </nav>
     <!-- CALL TO ACTION -->
-    <section class="relative overflow-hidden mt-[65px] relative ">
+    <section class="relative overflow-hidden mt-[65px] ">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-10 z-10 relative">
             <div class="w-auto inline-flex items-center p-1 pe-2 mb-4 text-sm text-purple-800 rounded-full bg-purple-50 border border-purple-200" role="alert">
                 <span class="bg-purple-100 text-purple-800 py-0.5 px-2 rounded-full">Create</span>
@@ -179,9 +179,7 @@
             </button>
         </form>
     </section>
-    <!-- HERO SECTION -->
-
-
+    <!-- HERO -->
     <section class="bg-neutral-primary">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16">
             <div class="flex flex-col justify-center">
@@ -278,6 +276,38 @@
 
             </div>
         </div>
+    </section>
+    <!-- HOW IT WORKS -->
+    <section class="relative">
+        <div class="mx-auto max-w-screen-xl py-8 lg:py-16 flex flex-col gap-8 items-center justify-center ">
+            <div class="flex w-full flex-col justify-center">
+                <h1 class="mb-6 text-4xl text-center font-bold tracking-tighter text-heading md:text-5xl lg:text-6xl">How does it <span class="text-purple-600 underline">work</span> </h1>
+                <p class="text-base text-center font-normal text-body md:text-xl">Create your quiz in 3 easy steps</p>
+            </div>
+
+            <div class="w-full flex items-center justify-between flex-wrap">
+
+                <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base shadow-xs">
+                    <img class="rounded-base" src="{{asset('images/step1.png')}}" alt="" />
+                    <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">Upload file or enter a prompt</h5>
+                    <p class="mb-6 text-body">You can start creating your quiz by either uploading files like PDF, DOCS, PPT. or you can enter your own prompt to study.</p>
+                </div>
+
+                <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base shadow-xs">
+                    <img class="rounded-base" src="{{asset('images/step1.png')}}" alt="" />
+                    <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">Select quiz preferences</h5>
+                    <p class="mb-6 text-body">Select your quiz preferences, like the amount of questions, language, and the type of quiz you want.</p>
+                </div>
+
+                <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base shadow-xs">
+                    <img class="rounded-base" src="{{asset('images/step1.png')}}" alt="" />
+                    <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">Start learning</h5>
+                    <p class="mb-6 text-body">After clicking generate, wait for a few seconds and then your can now start learning with ease.</p>
+                </div>
+
+            </div>
+        </div>
+
     </section>
 
 </body>
