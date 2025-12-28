@@ -181,7 +181,7 @@
     </section>
     <!-- HERO -->
     <section class="bg-neutral-primary">
-        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-20 grid lg:grid-cols-2 gap-8 lg:gap-16">
             <div class="flex flex-col justify-center">
                 <h1 class="mb-6 text-4xl font-bold tracking-tighter text-heading md:text-5xl lg:text-6xl">Upgrade your learning with Studee</h1>
                 <p class="text-base font-normal text-body md:text-xl">In just a few simple steps, you can boost your learning and gain confidence in what you study. Studee makes it easy to turn your lessons into meaningful practice, helping you learn smarter and faster.</p>
@@ -279,7 +279,7 @@
     </section>
     <!-- HOW IT WORKS -->
     <section class="relative">
-        <div class="mx-auto max-w-screen-xl py-8 lg:py-16 flex flex-col gap-8 items-center justify-center ">
+        <div class="mx-auto max-w-screen-xl py-8 lg:py-20 flex flex-col gap-8 items-center justify-center ">
             <div class="flex w-full flex-col justify-center">
                 <h1 class="mb-6 text-4xl text-center font-bold tracking-tighter text-heading md:text-5xl lg:text-6xl">How does it <span class="text-purple-600 underline">work</span> </h1>
                 <p class="text-base text-center font-normal text-body md:text-xl">Create your quiz in 3 easy steps</p>
@@ -307,7 +307,177 @@
 
             </div>
         </div>
+    </section>
+    <!-- WHY USE -->
+    <section class="relative">
+        <div class="mx-auto max-w-screen-xl py-8 lg:py-20 flex flex-col gap-8 items-center justify-center ">
+            <div class="flex w-full flex-col justify-center">
+                <h1 class="mb-6 text-4xl text-center font-bold tracking-tighter text-heading md:text-5xl lg:text-6xl">Why use <span class="text-purple-600 underline">Studee</span> for your studies</h1>
+                <p class="text-base text-center font-normal text-body md:text-xl">Create your quiz in 3 easy steps</p>
+            </div>
 
+            <div class="w-full flex items-center gap-12 justify-between flex-wrap">
+
+                <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base">
+                    <img class="rounded-base max-w-[123px]" src="{{asset('images/file-and-folder.png')}}" alt="" />
+                    <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">Start From Any Format</h5>
+                    <p class="mb-6 text-body">Our quiz maker supports multiple file format, including DOCX, DOCS, PDF, PPT, JPG, PNG. making your quiz journey versatile and easy.</p>
+                </div>
+
+                <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base">
+                    <img class="rounded-base max-w-[123px]" src="{{asset('images/books.png')}}" alt="" />
+                    <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">Interactive Learning</h5>
+                    <p class="mb-6 text-body">Engage with your lessons through interactive quizzes that encourage active participation and help improve understanding and knowledge retention.</p>
+                </div>
+
+                <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base">
+                    <img class="rounded-base max-w-[123px]" src="{{asset('images/creativity.png')}}" alt="" />
+                    <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">Effortless Test Creation</h5>
+                    <p class="mb-6 text-body">Create quizzes with ease by uploading files or entering prompts, allowing Studee to quickly turn your content into well-structured tests.</p>
+                </div>
+
+                <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base">
+                    <img class="rounded-base max-w-[123px]" src="{{asset('images/responsive.png')}}" alt="" />
+                    <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">Create quizzes on any device</h5>
+                    <p class="mb-6 text-body">Create and access quizzes anytime using any device. be it your computer or your phone, studee makes it easy to study, practice, and learn wherever you are.</p>
+                </div>
+
+                <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base">
+                    <img class="rounded-base max-w-[123px]" src="{{asset('images/responsive.png')}}" alt="" />
+                    <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">Create quizzes on any device</h5>
+                    <p class="mb-6 text-body">Create and access quizzes anytime using any device. be it your computer or your phone, studee makes it easy to study, practice, and learn wherever you are.</p>
+                </div>
+
+                <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base">
+                    <img class="rounded-base max-w-[123px]" src="{{asset('images/location.png')}}" alt="" />
+                    <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">Create Anytime Anywhere</h5>
+                    <p class="mb-6 text-body">Create quizzes wherever you are and whenever you need, making learning flexible, accessible, and easy to fit into your daily routine.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- FAQ -->
+    <section class="relative">
+        <div class="mx-auto max-w-screen-xl px-[15px] py-8 lg:py-20 flex flex-col lg:flex-row md:flex-row gap-20 items-start justify-between ">
+            <div class="flex max-w-[640px] items-start flex-col justify-center w-full">
+                <h1 class="mb-6 text-4xl font-bold tracking-tighter text-heading md:text-5xl lg:text-6xl">Got any questions? We got you</h1>
+                <p class="mb-8 text-base font-normal text-body md:text-xl">These are some of the most frequently asked questions about Studee. You can browse through them to learn more about how Studee works, its features, and how it can help improve your learning experience.</p>
+                <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 md:space-x-4">
+                    <button type="button" class="inline-flex items-center justify-center text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium rounded-base text-base px-5 py-3 focus:outline-none">
+                        Contact Us
+                        <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
+                        </svg>
+                    </button>
+                    <button type="button" class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-base px-5 py-3 focus:outline-none">FAQ</button>
+                </div>
+            </div>
+
+            <div class="w-full" id="accordion-flush" data-accordion="collapse" data-active-classes="bg-neutral-primary text-heading" data-inactive-classes="text-body">
+                <h2 id="accordion-flush-heading-1">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-start text-body border-b border-default gap-3" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+                        <span>What is Flowbite?</span>
+                        <svg data-accordion-icon class="w-5 h-5 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7" />
+                        </svg>
+                    </button>
+                </h2>
+                <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
+                    <div class="py-5 border-b border-default text-body">
+                        <p class="mb-2">Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.</p>
+                        <p>Check out this guide to learn how to <a href="/docs/getting-started/introduction/" class="text-fg-brand hover:underline">get started</a> and start developing websites even faster with components on top of Tailwind CSS.</p>
+                    </div>
+                </div>
+                <h2 id="accordion-flush-heading-2">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-start text-body border-b border-default gap-3" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
+                        <span>Is there a Figma file available?</span>
+                        <svg data-accordion-icon class="w-5 h-5 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7" />
+                        </svg>
+                    </button>
+                </h2>
+                <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
+                    <div class="py-5 border-b border-default text-body">
+                        <p class="mb-2">Flowbite is first conceptualized and designed using the Figma software so everything you see in the library has a design equivalent in our Figma file.</p>
+                        <p>Check out the <a href="https://flowbite.com/figma/" class="text-fg-brand hover:underline">Figma design system</a> based on the utility classes from Tailwind CSS and components from Flowbite.</p>
+                    </div>
+                </div>
+                <h2 id="accordion-flush-heading-3">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-start text-body border-b border-default gap-3" data-accordion-target="#accordion-flush-body-3" aria-expanded="false" aria-controls="accordion-flush-body-3">
+                        <span>What are the differences between Flowbite and Tailwind UI?</span>
+                        <svg data-accordion-icon class="w-5 h-5 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7" />
+                        </svg>
+                    </button>
+                </h2>
+                <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
+                    <div class="py-5 text-body border-b border-default">
+                        <p class="mb-2">The main difference is that the core components from Flowbite are open source under the MIT license, whereas Tailwind UI is a paid product. Another difference is that Flowbite relies on smaller and standalone components, whereas Tailwind UI offers sections of pages.</p>
+                        <p class="mb-2">However, we actually recommend using both Flowbite, Flowbite Pro, and even Tailwind UI as there is no technical reason stopping you from using the best of two worlds.</p>
+                        <p class="mb-2">Learn more about these technologies:</p>
+                        <ul class="ps-5 list-disc">
+                            <li><a href="https://flowbite.com/pro/" class="text-fg-brand hover:underline">Flowbite Pro</a></li>
+                            <li><a href="https://tailwindui.com/" rel="nofollow" class="text-fg-brand hover:underline">Tailwind UI</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <h2 id="accordion-flush-heading-4">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-start text-body border-b border-default gap-3" data-accordion-target="#accordion-flush-body-4" aria-expanded="false" aria-controls="accordion-flush-body-3">
+                        <span>What are the differences between Flowbite and Tailwind UI?</span>
+                        <svg data-accordion-icon class="w-5 h-5 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7" />
+                        </svg>
+                    </button>
+                </h2>
+                <div id="accordion-flush-body-4" class="hidden" aria-labelledby="accordion-flush-heading-4">
+                    <div class="py-5 text-body border-b border-default">
+                        <p class="mb-2">The main difference is that the core components from Flowbite are open source under the MIT license, whereas Tailwind UI is a paid product. Another difference is that Flowbite relies on smaller and standalone components, whereas Tailwind UI offers sections of pages.</p>
+                        <p class="mb-2">However, we actually recommend using both Flowbite, Flowbite Pro, and even Tailwind UI as there is no technical reason stopping you from using the best of two worlds.</p>
+                        <p class="mb-2">Learn more about these technologies:</p>
+                        <ul class="ps-5 list-disc">
+                            <li><a href="https://flowbite.com/pro/" class="text-fg-brand hover:underline">Flowbite Pro</a></li>
+                            <li><a href="https://tailwindui.com/" rel="nofollow" class="text-fg-brand hover:underline">Tailwind UI</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <h2 id="accordion-flush-heading-5">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-start text-body border-b border-default gap-3" data-accordion-target="#accordion-flush-body-5" aria-expanded="false" aria-controls="accordion-flush-body-3">
+                        <span>What are the differences between Flowbite and Tailwind UI?</span>
+                        <svg data-accordion-icon class="w-5 h-5 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7" />
+                        </svg>
+                    </button>
+                </h2>
+                <div id="accordion-flush-body-5" class="hidden" aria-labelledby="accordion-flush-heading-5">
+                    <div class="py-5 text-body border-b border-default">
+                        <p class="mb-2">The main difference is that the core components from Flowbite are open source under the MIT license, whereas Tailwind UI is a paid product. Another difference is that Flowbite relies on smaller and standalone components, whereas Tailwind UI offers sections of pages.</p>
+                        <p class="mb-2">However, we actually recommend using both Flowbite, Flowbite Pro, and even Tailwind UI as there is no technical reason stopping you from using the best of two worlds.</p>
+                        <p class="mb-2">Learn more about these technologies:</p>
+                        <ul class="ps-5 list-disc">
+                            <li><a href="https://flowbite.com/pro/" class="text-fg-brand hover:underline">Flowbite Pro</a></li>
+                            <li><a href="https://tailwindui.com/" rel="nofollow" class="text-fg-brand hover:underline">Tailwind UI</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- CALL TO ACTION -->
+    <section class="bg-neutral-primary px-[15px]">
+        <div class="py-8 max-w-screen-xl rounded-3xl bg-gradient-to-r from-[rgba(46,16,101,0.95)] via-[rgba(88,28,135,0.6)] to-[rgba(216,180,254,0.4)] px-4 mx-auto max-w-screen-2xl text-center lg:py-20">
+            <h1 class="mb-6 text-4xl font-bold tracking-tighter text-heading md:text-5xl lg:text-6xl">We invest in the world’s potential</h1>
+            <p class="mb-8 text-base font-normal text-body md:text-xl">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
+            <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 md:space-x-4">
+                <button type="button" class="inline-flex items-center justify-center text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium rounded-base text-base px-5 py-3 focus:outline-none">
+                    Getting started
+                    <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
+                    </svg>
+                </button>
+                <button type="button" class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-base px-5 py-3 focus:outline-none">Learn more</button>
+            </div>
+        </div>
     </section>
 
 </body>
