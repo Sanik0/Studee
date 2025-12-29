@@ -180,7 +180,7 @@
             </button>
         </form> --}}
         <!-- CHOOSE FORM -->
-        <form action="" class="w-full max-w-screen-sm gap-[10px] justify-center items-end flex flex-col">
+        <form action="" class="w-full max-w-screen-sm gap-[15px] justify-center items-end flex flex-col">
             <h2 class="mb-6 text-2xl w-full flex items-start font-bold tracking-tighter text-heading md:text-3xl lg:text-4xl">What type of quiz do you want</h2>
             <div class="flex flex-col w-full gap-[20px]">
                 <ul class="select-none w-full gap-4 flex flex-col">
@@ -226,14 +226,36 @@
                             </div>
                         </label>
                     </li>
+                    <li>
+                        <input type="radio" id="flutter-option" value="flutter-option" name="technologies" class="hidden peer">
+                        <label for="flutter-option" class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-200 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-800">
+                            <div class="flex flex-col lg:flex-row lg:gap-4 gap-0 items-start lg:items-center">
+                                <svg class="mb-2 text-danger w-7 h-7" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path d="M185.7 268.1h76.2l-38.1-91.6-38.1 91.6zM223.8 32L16 106.4l31.8 275.7 176 97.9 176-97.9 31.8-275.7zM354 373.8h-48.6l-26.2-65.4H168.6l-26.2 65.4H93.7L223.8 81.5z" />
+                                </svg>
+                                <div class="flex flex-col gap-0 lg:gap-1">
+                                    <div class="w-full font-medium mb-1">Angular</div>
+                                    <div class="w-full text-sm">An model–view front end JavaScript framework.</div>
+                                </div>
+                            </div>
+                        </label>
+                    </li>
                 </ul>
             </div>
-            <button disabled type="button" class="inline-flex w-fit items-center disabled:bg-purple-800 disabled:cursor-not-allowed text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                Next Step
-                <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
-                </svg>
-            </button>
+            <div class="w-full flex flex-col-reverse lg:flex-row md:flex-row gap-4 md:gap-0 lg:gap-0 justify-between items-center">
+                <button type="button" class="inline-flex items-center justify-center lg:w-fit md:w-fit w-full items-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-xl md:text-sm lg:text-sm  px-5 py-3 focus:outline-none">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.70711 7.29289C10.0976 7.68342 10.0976 8.31658 9.70711 8.70711L7.41421 11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H7.41421L9.70711 15.2929C10.0976 15.6834 10.0976 16.3166 9.70711 16.7071C9.31658 17.0976 8.68342 17.0976 8.29289 16.7071L4.29289 12.7071C3.90237 12.3166 3.90237 11.6834 4.29289 11.2929L8.29289 7.29289C8.68342 6.90237 9.31658 6.90237 9.70711 7.29289Z" fill="#101828" />
+                    </svg>
+                    Go Back
+                </button>
+                <button type="button" class="inline-flex items-center justify-center lg:w-fit md:w-fit w-full items-center disabled:bg-purple-800 disabled:cursor-not-allowed text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-xl md:text-sm lg:text-sm px-4 md:py-2.5 lg:py-2.5 py-4 text-center focus:outline-none">
+                    Generate
+                    <svg class="lg:w-4 md:w-4 w-7 lg:h-4 md:h-4 ms-1.5 fill-white -me-0.5" fill="#000000" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 26.6875 12.6602 C 26.9687 12.6602 27.1094 12.4961 27.1797 12.2383 C 27.9062 8.3242 27.8594 8.2305 31.9375 7.4570 C 32.2187 7.4102 32.3828 7.2461 32.3828 6.9648 C 32.3828 6.6836 32.2187 6.5195 31.9375 6.4726 C 27.8828 5.6524 28.0000 5.5586 27.1797 1.6914 C 27.1094 1.4336 26.9687 1.2695 26.6875 1.2695 C 26.4062 1.2695 26.2656 1.4336 26.1953 1.6914 C 25.3750 5.5586 25.5156 5.6524 21.4375 6.4726 C 21.1797 6.5195 20.9922 6.6836 20.9922 6.9648 C 20.9922 7.2461 21.1797 7.4102 21.4375 7.4570 C 25.5156 8.2774 25.4687 8.3242 26.1953 12.2383 C 26.2656 12.4961 26.4062 12.6602 26.6875 12.6602 Z M 15.3438 28.7852 C 15.7891 28.7852 16.0938 28.5039 16.1406 28.0821 C 16.9844 21.8242 17.1953 21.8242 23.6641 20.5821 C 24.0860 20.5117 24.3906 20.2305 24.3906 19.7852 C 24.3906 19.3633 24.0860 19.0586 23.6641 18.9883 C 17.1953 18.0977 16.9609 17.8867 16.1406 11.5117 C 16.0938 11.0899 15.7891 10.7852 15.3438 10.7852 C 14.9219 10.7852 14.6172 11.0899 14.5703 11.5352 C 13.7969 17.8164 13.4687 17.7930 7.0469 18.9883 C 6.6250 19.0821 6.3203 19.3633 6.3203 19.7852 C 6.3203 20.2539 6.6250 20.5117 7.1406 20.5821 C 13.5156 21.6133 13.7969 21.7774 14.5703 28.0352 C 14.6172 28.5039 14.9219 28.7852 15.3438 28.7852 Z M 31.2344 54.7305 C 31.8438 54.7305 32.2891 54.2852 32.4062 53.6524 C 34.0703 40.8086 35.8750 38.8633 48.5781 37.4570 C 49.2344 37.3867 49.6797 36.8945 49.6797 36.2852 C 49.6797 35.6758 49.2344 35.2070 48.5781 35.1133 C 35.8750 33.7070 34.0703 31.7617 32.4062 18.9180 C 32.2891 18.2852 31.8438 17.8633 31.2344 17.8633 C 30.6250 17.8633 30.1797 18.2852 30.0860 18.9180 C 28.4219 31.7617 26.5938 33.7070 13.9140 35.1133 C 13.2344 35.2070 12.7891 35.6758 12.7891 36.2852 C 12.7891 36.8945 13.2344 37.3867 13.9140 37.4570 C 26.5703 39.1211 28.3281 40.8321 30.0860 53.6524 C 30.1797 54.2852 30.6250 54.7305 31.2344 54.7305 Z" />
+                    </svg>
+                </button>
+            </div>
         </form>
     </section>
     <!-- HERO -->
