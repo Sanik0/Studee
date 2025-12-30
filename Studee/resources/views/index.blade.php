@@ -12,6 +12,33 @@
 </head>
 
 <body class="relative flex flex-col">
+    <!-- MODAL -->
+    <section>
+        <div id="popup-modal" tabindex="-1" class=" overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
+                    <button type="button" class="absolute top-3 end-2.5 text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center" data-modal-hide="popup-modal">
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <div class="p-4 md:p-5 text-center">
+                        <svg class="mx-auto mb-4 text-fg-disabled w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                        <h3 class="mb-6 text-body">We couldn’t process your file. Please ensure it’s valid and contains readable text that can be extracted.</h3>
+                        <div class="flex items-center space-x-4 justify-center">
+                            <button data-modal-hide="popup-modal" type="button" class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Retry</button>
+                            <button data-modal-hide="popup-modal" type="button" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                                Understood
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- NAVIGATION -->
     <nav class="bg-neutral-primary fixed w-full z-20 top-0 start-0 border-b border-default">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -206,7 +233,7 @@
                             <div class="flex flex-col lg:flex-row lg:gap-4 gap-0 items-start lg:items-center">
                                 <div class="rounded-[8px] mb-[7px] lg:mb-0 md:mb-0 group-peer-checked:bg-purple-200 flex items-center justify-center bg-gray-100 p-[7px]">
                                     <svg width="30" height="30" class="group-peer-checked:fill-purple-500 fill-gray-700" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99984 3.33333C6.31794 3.33333 3.33317 6.3181 3.33317 10C3.33317 13.6819 6.31794 16.6667 9.99984 16.6667C13.6817 16.6667 16.6665 13.6819 16.6665 10C16.6665 6.3181 13.6817 3.33333 9.99984 3.33333ZM1.6665 10C1.6665 5.39763 5.39746 1.66667 9.99984 1.66667C14.6022 1.66667 18.3332 5.39763 18.3332 10C18.3332 14.6024 14.6022 18.3333 9.99984 18.3333C5.39746 18.3333 1.6665 14.6024 1.6665 10ZM10.0718 7.15231C9.7401 7.13964 9.41697 7.25925 9.17347 7.48482C8.92998 7.7104 8.78607 8.02346 8.7734 8.35514C8.75583 8.81504 8.36876 9.17363 7.90886 9.15606C7.44896 9.13849 7.09038 8.75142 7.10794 8.29152C7.13749 7.51814 7.47305 6.78816 8.04081 6.26218C8.60856 5.73621 9.36201 5.45731 10.1354 5.48686C10.9088 5.5164 11.6388 5.85196 12.1647 6.41972C12.6884 6.98503 12.9672 7.73443 12.9404 8.50431C12.9338 8.8827 12.8522 9.25606 12.7005 9.60283C12.5474 9.95267 12.3259 10.2684 12.0491 10.5314C11.7722 10.7945 11.4456 10.9995 11.0884 11.1346C11.0045 11.1663 10.9193 11.194 10.8332 11.2176V11.6667C10.8332 12.1269 10.4601 12.5 9.99984 12.5C9.5396 12.5 9.1665 12.1269 9.1665 11.6667V10.485C9.1665 10.2586 9.25859 10.042 9.42159 9.88494C9.58458 9.72787 9.80446 9.64386 10.0307 9.65224C10.1904 9.65815 10.3496 9.63209 10.4991 9.57558C10.6485 9.51908 10.7852 9.43328 10.901 9.32321C11.0169 9.21314 11.1096 9.08103 11.1736 8.93465C11.2377 8.78826 11.2718 8.63054 11.2741 8.47077L11.2746 8.45069C11.2873 8.11901 11.1677 7.79588 10.9421 7.55238C10.7165 7.30889 10.4035 7.16498 10.0718 7.15231ZM9.15816 14.1732C9.15816 13.7129 9.53126 13.3398 9.9915 13.3398H9.99983C10.4601 13.3398 10.8332 13.7129 10.8332 14.1732C10.8332 14.6334 10.4601 15.0065 9.99983 15.0065H9.9915C9.53126 15.0065 9.15816 14.6334 9.15816 14.1732Z"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99984 3.33333C6.31794 3.33333 3.33317 6.3181 3.33317 10C3.33317 13.6819 6.31794 16.6667 9.99984 16.6667C13.6817 16.6667 16.6665 13.6819 16.6665 10C16.6665 6.3181 13.6817 3.33333 9.99984 3.33333ZM1.6665 10C1.6665 5.39763 5.39746 1.66667 9.99984 1.66667C14.6022 1.66667 18.3332 5.39763 18.3332 10C18.3332 14.6024 14.6022 18.3333 9.99984 18.3333C5.39746 18.3333 1.6665 14.6024 1.6665 10ZM10.0718 7.15231C9.7401 7.13964 9.41697 7.25925 9.17347 7.48482C8.92998 7.7104 8.78607 8.02346 8.7734 8.35514C8.75583 8.81504 8.36876 9.17363 7.90886 9.15606C7.44896 9.13849 7.09038 8.75142 7.10794 8.29152C7.13749 7.51814 7.47305 6.78816 8.04081 6.26218C8.60856 5.73621 9.36201 5.45731 10.1354 5.48686C10.9088 5.5164 11.6388 5.85196 12.1647 6.41972C12.6884 6.98503 12.9672 7.73443 12.9404 8.50431C12.9338 8.8827 12.8522 9.25606 12.7005 9.60283C12.5474 9.95267 12.3259 10.2684 12.0491 10.5314C11.7722 10.7945 11.4456 10.9995 11.0884 11.1346C11.0045 11.1663 10.9193 11.194 10.8332 11.2176V11.6667C10.8332 12.1269 10.4601 12.5 9.99984 12.5C9.5396 12.5 9.1665 12.1269 9.1665 11.6667V10.485C9.1665 10.2586 9.25859 10.042 9.42159 9.88494C9.58458 9.72787 9.80446 9.64386 10.0307 9.65224C10.1904 9.65815 10.3496 9.63209 10.4991 9.57558C10.6485 9.51908 10.7852 9.43328 10.901 9.32321C11.0169 9.21314 11.1096 9.08103 11.1736 8.93465C11.2377 8.78826 11.2718 8.63054 11.2741 8.47077L11.2746 8.45069C11.2873 8.11901 11.1677 7.79588 10.9421 7.55238C10.7165 7.30889 10.4035 7.16498 10.0718 7.15231ZM9.15816 14.1732C9.15816 13.7129 9.53126 13.3398 9.9915 13.3398H9.99983C10.4601 13.3398 10.8332 13.7129 10.8332 14.1732C10.8332 14.6334 10.4601 15.0065 9.99983 15.0065H9.9915C9.53126 15.0065 9.15816 14.6334 9.15816 14.1732Z" />
                                     </svg>
                                 </div>
                                 <div class="flex flex-col gap-0 lg:gap-1">
@@ -237,7 +264,7 @@
                         <label for="flutter-option" class="inline-flex group items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-200 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-800">
                             <div class="flex flex-col lg:flex-row lg:gap-4 gap-0 items-start lg:items-center">
                                 <div class="rounded-[8px] mb-[7px] lg:mb-0 md:mb-0 group-peer-checked:bg-purple-200 flex items-center justify-center bg-gray-100 p-[7px]">
-                                    <svg  class="group-peer-checked:fill-purple-500 fill-gray-700" width="30" height="30" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg class="group-peer-checked:fill-purple-500 fill-gray-700" width="30" height="30" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12.3388 2.5C12.5598 2.5 12.7718 2.5878 12.928 2.74408L17.2559 7.07203C17.5814 7.39747 17.5814 7.9251 17.2559 8.25054L15.0813 10.4252C14.925 10.5815 14.713 10.6693 14.492 10.6693C14.4677 10.6693 14.4435 10.6683 14.4195 10.6662L13.1074 14.1638C13.021 14.3944 12.837 14.5749 12.6048 14.6569L4.69318 17.4524C4.39049 17.5593 4.05329 17.4829 3.82629 17.2559L2.7441 16.1737C2.5171 15.9467 2.44068 15.6095 2.54763 15.3068L5.34311 7.39511C5.42513 7.16296 5.60562 6.97897 5.83615 6.89249L9.33389 5.58039C9.31339 5.3437 9.39371 5.09993 9.57484 4.91879L11.7495 2.74408C11.9058 2.5878 12.1178 2.5 12.3388 2.5ZM14.492 8.65748L15.4882 7.66128L12.3388 4.51185L11.3426 5.50805L14.492 8.65748ZM10.4271 6.95038L6.78517 8.31656L4.75273 14.0688L8.07506 10.7464C8.4005 10.4209 8.92814 10.4209 9.25358 10.7464C9.57901 11.0718 9.57902 11.5995 9.25358 11.9249L5.93122 15.2473L11.6834 13.2148L13.0495 9.57286L10.4271 6.95038Z" />
                                     </svg>
                                 </div>
