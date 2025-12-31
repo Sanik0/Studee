@@ -7,7 +7,9 @@
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Figtree:ital,wght@0,300..900;1,300..900&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Space+Grotesk:wght@300..700&family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=BBH+Bartle&family=Jersey+10&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
 </head>
 
@@ -121,7 +123,7 @@
         </div>
     </nav>
     <!-- MODAL -->
-    <section>
+    {{-- <section>
         <div id="popup-modal" tabindex="-1" class=" overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] h-full max-h-full">
             <div class="relative p-4 w-full max-w-md max-h-full">
                 <div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
@@ -146,7 +148,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- CALL TO ACTION -->
     <section class="relative overflow-hidden mt-[65px] ">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-10 z-10 relative">
@@ -159,7 +161,7 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
                 </svg>
             </div>
-            <h1 class="mb-6 text-4xl font-semibold tracking-tighter text-heading md:text-5xl lg:text-6xl">Upload a document to start your quiz</h1>
+            <h1 class="mb-6 text-4xl font-semibold tracking-tighter text-heading md:text-5xl lg:text-6xl">Upload a <span class="font-jersey10"></span>document to start your quiz</h1>
             <p class="mb-8 text-base font-normal text-body md:text-xl">Make learning easier and more enjoyable with Studee Quiz Maker!
                 Studee uses AI to help you turn your notes or documents into interactive quizzes in just a few clicks.</p>
             <div class="w-auto inline-flex items-center p-1 pe-2 mb-4 font-medium text-sm text-purple-800 rounded-full bg-purple-200 border border-purple-200" role="alert">
@@ -176,7 +178,7 @@
         <!-- UPLOAD FORM -->
         {{-- <form action="" class="w-full max-w-screen-sm gap-[20px] justify-center items-end flex flex-col">
             <!-- FILE UPLOAD -->
-            <!-- <div class="flex items-center justify-center w-full">
+            <div class="flex items-center justify-center w-full">
                 <div class="flex flex-col items-center justify-center w-full h-64 bg-neutral-secondary-medium border border-dashed border-purple-600 rounded-base">
                     <div class="flex flex-col items-center justify-center text-body pt-5 pb-6">
                         <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -193,21 +195,21 @@
                     </div>
                 </div> 
                 <input id="dropzone-file-2" type="file" class="hidden" />
-            </div> -->
+            </div>
             <!-- PROMPT -->
-            <textarea id="prompt" rows="4" class="bg-neutral-secondary-medium border border-purple-400 text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 resize-none h-[250px] block w-full p-3.5 shadow-xs placeholder:text-body" placeholder="Generate a computer science quiz focusing on fundamentals such as algorithms, data structures, programming concepts, and basic computer systems. "></textarea>
+            <!-- <textarea id="prompt" rows="4" class="bg-neutral-secondary-medium border border-purple-400 text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 resize-none h-[250px] block w-full p-3.5 shadow-xs placeholder:text-body" placeholder="Generate a computer science quiz focusing on fundamentals such as algorithms, data structures, programming concepts, and basic computer systems. "></textarea>
             <p class="mt-2 text-sm text-gray-500">
                 <span id="count">0</span> / 300
-            </p>
+            </p> -->
             <button disabled type="button" class="inline-flex w-fit items-center disabled:bg-purple-800 disabled:cursor-not-allowed text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                 Next Step
                 <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
                 </svg>
             </button>
-        </form> --}}
+        </form> -- }}
         <!-- CHOOSE FORM -->
-        <form action="" class="w-full max-w-screen-sm gap-[15px] justify-center items-end flex flex-col">
+        {{-- <form action="" class="w-full max-w-screen-sm gap-[15px] justify-center items-end flex flex-col">
             <h2 class="mb-6 text-2xl w-full flex items-start font-bold tracking-tighter text-heading md:text-3xl lg:text-4xl">What type of quiz do you want</h2>
             <div class="flex flex-col w-full gap-[20px]">
                 <ul class="select-none w-full gap-4 flex flex-col">
@@ -291,7 +293,24 @@
                     </svg>
                 </button>
             </div>
-        </form>
+        </form> --}}
+        <!-- GENERATING -->
+        <div class="w-full max-w-screen-sm flex flex-col items-center justify-center px-[15px]">
+            <dotlottie-player
+                src="{{ asset('lottie/Rocket loader.lottie') }}"
+                autoplay
+                loop
+                class="w-[400px] h-[400px]"></dotlottie-player>
+
+            <div class="flex justify-between mb-1">
+                <span class="text-sm font-medium text-body">Generating your quiz...hang tight!</span>
+                <span class="text-sm font-medium text-body">45%</span>
+            </div>
+            <div class="w-full bg-neutral-quaternary rounded-full h-2">
+                <div class="bg-brand h-2 rounded-full" style="width: 45%"></div>
+            </div>
+
+        </div>
     </section>
     <!-- HERO -->
     <section class="bg-neutral-primary">
@@ -684,6 +703,7 @@
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 <script>
     const textarea = document.getElementById('prompt');
     const counter = document.getElementById('count');
