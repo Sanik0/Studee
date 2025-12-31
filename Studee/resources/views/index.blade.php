@@ -297,17 +297,17 @@
         <!-- GENERATING -->
         <div class="w-full max-w-screen-sm flex flex-col items-center justify-center px-[15px]">
             <dotlottie-player
-                src="{{ asset('lottie/Rocket loader.lottie') }}"
+                src="{{ asset('lottie/Ai-powered marketing tools abstract.lottie') }}"
                 autoplay
                 loop
-                class="w-[400px] h-[400px]"></dotlottie-player>
+                class="md:w-[350px] lg:w-[350px] w-[300px] md:h-[350px] lg:h-[350px]"></dotlottie-player>
 
             <div class="flex justify-between mb-1">
                 <span class="text-sm font-medium text-body">Generating your quiz...hang tight!</span>
                 <span class="text-sm font-medium text-body">45%</span>
             </div>
             <div class="w-full bg-neutral-quaternary rounded-full h-2">
-                <div class="bg-brand h-2 rounded-full" style="width: 45%"></div>
+                <div class="bg-purple-600 h-2 rounded-full" style="width: 45%"></div>
             </div>
 
         </div>
