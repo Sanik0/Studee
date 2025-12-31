@@ -15,8 +15,6 @@
 
 <body class="relative flex flex-col">
     <!-- NAVIGATION -->
-
-
     <nav class="bg-neutral-primary fixed w-full z-20 top-0 start-0 border-b border-default">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -35,14 +33,13 @@
                 <button type="button" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Exit Quiz</button>
             </div>
             <div class="items-center justify-between hidden md:flex w-full md:w-auto md:order-1" id="navbar-sticky">
-               <div class="flex items-center justify-center flex-col w-full gap-2">
-                <h3 class="text-base font-semibold">1/30</h3>
-                <h4 class="text-base font-medium">Introduction to computer architecture, organization, and  programming languages</h4>
-               </div>
+                <div class="flex items-center justify-center flex-col w-full gap-2">
+                    <h3 class="text-base font-semibold">1/30</h3>
+                    <h4 class="text-base font-medium">Introduction to computer architecture, organization, and programming languages</h4>
+                </div>
             </div>
         </div>
     </nav>
-
     <!-- MODAL -->
     {{-- <section>
         <div id="popup-modal" tabindex="-1" class=" overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] h-full max-h-full">
@@ -70,6 +67,52 @@
             </div>
         </div>
     </section> --}}
+    <!-- QUIZ FORM -->
+    <section class="w-full mt-20 ">
+        <form action="" class="w-full relative px-[15px] flex flex-col pt-15 gap-4 max-w-screen-xl mx-auto items-center justify-center">
+            <div class=" rounded-[20px] w-full max-w-2xl flex flex-col gap-4 border-[1px] border-gray-300 p-[30px]">
+                <small class="text-sm w-full text-end font-medium">1/30</small>
+                <p class="text-lg w-full ">High speed storage elements used in the CPU for temporary storage of frequently used operands.</p>
+                <div class="w-full flex flex-col gap-1 mt-6">
+                    <h3 class="mb-5 text-sm font-medium text-gray-700">Choose Answer</h3>
+                    <ul class="grid w-full gap-6 md:grid-cols-2">
+                        <li>
+                            <input type="radio" id="hosting-small" name="hosting" value="hosting-small" class="hidden peer" required />
+                            <label for="hosting-small" class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-900">
+                                <div class="block">
+                                    <div class="w-full">Good for small websites</div>
+                                </div>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="radio" id="hosting-big" name="hosting" value="hosting-big" class="hidden peer">
+                            <label for="hosting-big" class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-900">
+                                <div class="block">
+                                    <div class="w-full">Good for large websites</div>
+                                </div>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="radio" id="hosting-big" name="hosting" value="hosting-big" class="hidden peer">
+                            <label for="hosting-big" class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-900">
+                                <div class="block">
+                                    <div class="w-full">Good for large websites</div>
+                                </div>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="radio" id="hosting-big" name="hosting" value="hosting-big" class="hidden peer">
+                            <label for="hosting-big" class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-900">
+                                <div class="block">
+                                    <div class="w-full">Good for large websites</div>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </section>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 
