@@ -306,8 +306,8 @@
                 <span class="text-sm font-medium text-body">Generating your quiz...hang tight!</span>
                 <span class="text-sm font-medium text-body">45%</span>
             </div>
-            <div class="w-full bg-neutral-quaternary rounded-full h-2">
-                <div class="bg-purple-600 h-2 rounded-full" style="width: 45%"></div>
+            <div class="w-full bg-neutral-quaternary rounded-full h-3">
+                <div class="bg-purple-600 h-3 rounded-full" style="width: 45%"></div>
             </div>
 
         </div>
