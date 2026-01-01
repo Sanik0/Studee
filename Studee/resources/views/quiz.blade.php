@@ -69,12 +69,13 @@
     </section> --}}
     <!-- QUIZ FORM -->
     <section class="w-full mt-20 ">
-        <form action="" class="w-full relative px-[15px] flex flex-col pt-15 gap-4 max-w-screen-xl mx-auto items-center justify-center">
+        <form action="" class="w-full relative px-[15px] flex flex-col pt-15 gap-8 max-w-screen-xl mx-auto items-center justify-center">
+            <!-- MULTIPLE CHOICE -->
             <div class=" rounded-[20px] w-full max-w-2xl flex flex-col gap-4 border-[1px] border-gray-300 p-[30px]">
                 <small class="text-sm w-full text-end font-medium">1/30</small>
                 <p class="text-lg w-full ">High speed storage elements used in the CPU for temporary storage of frequently used operands.</p>
                 <div class="w-full flex flex-col gap-1 mt-6">
-                    <h3 class="mb-5 text-sm font-medium text-gray-700">Choose Answer</h3>
+                    <h3 class="mb-3 text-sm font-medium text-gray-700">Choose Answer</h3>
                     <ul class="grid w-full gap-6 md:grid-cols-2">
                         <li>
                             <input type="radio" id="hosting-small" name="hosting" value="hosting-small" class="hidden peer" required />
@@ -105,6 +106,32 @@
                             <label for="hosting-big" class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-900">
                                 <div class="block">
                                     <div class="w-full">Good for large websites</div>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- TRUE OR FALSE -->
+            <div class=" rounded-[20px] w-full max-w-2xl flex flex-col gap-4 border-[1px] border-gray-300 p-[30px]">
+                <small class="text-sm w-full text-end font-medium">1/30</small>
+                <p class="text-lg w-full ">High speed storage elements used in the CPU for temporary storage of frequently used operands.</p>
+                <div class="w-full flex flex-col gap-1 mt-6">
+                    <h3 class="mb-3 text-sm font-medium text-gray-700">Choose Answer</h3>
+                    <ul class="grid w-full gap-6 md:grid-cols-2">
+                        <li>
+                            <input type="radio" id="true" name="truefalse" value="true" class="hidden peer" required />
+                            <label for="true" class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-900">
+                                <div class="block">
+                                    <div class="w-full">True</div>
+                                </div>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="radio" id="false" name="truefalse" value="false" class="hidden peer">
+                            <label for="false" class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-900">
+                                <div class="block">
+                                    <div class="w-full">False</div>
                                 </div>
                             </label>
                         </li>
