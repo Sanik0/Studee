@@ -69,7 +69,7 @@
     </section> --}}
     <!-- QUIZ FORM -->
     <section class="w-full mt-20 ">
-        <form action="" class="w-full relative px-[15px] flex flex-col pt-15 gap-8 max-w-screen-xl mx-auto items-center justify-center">
+        <form action="" class="w-full relative px-[15px] flex flex-col pt-15 gap-15 max-w-screen-xl mx-auto items-center justify-center">
             <!-- MULTIPLE CHOICE -->
             <div class=" rounded-[20px] w-full max-w-2xl flex flex-col gap-4 border-[1px] border-gray-300 p-[30px]">
                 <small class="text-sm w-full text-end font-medium">1/30</small>
@@ -151,6 +151,24 @@
                     </div>
                 </div>
             </div>
+              <!-- FILL IN THE BLANKS -->
+            <div class=" rounded-[20px] w-full max-w-2xl flex flex-col gap-4 border-[1px] border-gray-300 p-[30px]">
+                <small class="text-sm w-full text-end font-medium">1/30</small>
+                <p class="text-lg w-full ">High speed storage elements used in the ___ for temporary storage of frequently used operands.</p>
+                <div class="w-full flex flex-col gap-1 mt-6">
+                    <h3 class="mb-3 text-sm font-medium text-gray-700">Choose Answer</h3>
+                    <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                    <div class="relative">
+                        <input type="text" id="search" class="block w-full p-3 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 shadow-xs placeholder:text-body" placeholder="Type your answer" required />
+                        <button type="button" class="absolute end-1.5 bottom-1.5 text-white bg-purple-600 hover:bg-purple-800 box-border border border-transparent focus:ring-4 focus:ring-purple-200 shadow-xs font-medium leading-5 rounded text-xs px-3 py-1.5 focus:outline-none">Next</button>
+                    </div>
+                </div>
+            </div>
+              <!-- SUBMIT BUTTON -->
+               <div class="flex flex-col mb-5 gap-3 items-center justify-center text-center">
+                <p>Are you done with your quiz? Submit now to get the result</p>
+                <button type="button" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Submit Quiz</button>
+               </div>
         </form>
     </section>
 </body>
