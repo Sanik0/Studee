@@ -138,6 +138,19 @@
                     </ul>
                 </div>
             </div>
+            <!-- IDENTIFICATION -->
+            <div class=" rounded-[20px] w-full max-w-2xl flex flex-col gap-4 border-[1px] border-gray-300 p-[30px]">
+                <small class="text-sm w-full text-end font-medium">1/30</small>
+                <p class="text-lg w-full ">High speed storage elements used in the CPU for temporary storage of frequently used operands.</p>
+                <div class="w-full flex flex-col gap-1 mt-6">
+                    <h3 class="mb-3 text-sm font-medium text-gray-700">Choose Answer</h3>
+                    <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                    <div class="relative">
+                        <input type="text" id="search" class="block w-full p-3 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 shadow-xs placeholder:text-body" placeholder="Type your answer" required />
+                        <button type="button" class="absolute end-1.5 bottom-1.5 text-white bg-purple-600 hover:bg-purple-800 box-border border border-transparent focus:ring-4 focus:ring-purple-200 shadow-xs font-medium leading-5 rounded text-xs px-3 py-1.5 focus:outline-none">Next</button>
+                    </div>
+                </div>
+            </div>
         </form>
     </section>
 </body>
