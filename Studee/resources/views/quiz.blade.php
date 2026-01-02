@@ -67,6 +67,49 @@
             </div>
         </div>
     </section> --}}
+    <!-- COMPLETION -->
+    <section>
+        <div id="popup-modal" tabindex="-1" class=" overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] h-full max-h-full">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
+                    <button type="button" class="absolute top-3 end-2.5 text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center" data-modal-hide="popup-modal">
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <div class="p-4 md:p-5 text-center">
+                        <svg class="mx-auto mb-4 text-fg-disabled w-20 h-20" viewBox="0 0 96 96" fill="none">
+                            <path d="M0 48C0 21.4903 21.4903 0 48 0C74.5097 0 96 21.4903 96 48C96 74.5097 74.5097 96 48 96C21.4903 96 0 74.5097 0 48Z" fill="#FFD700" fill-opacity="0.2" />
+                            <path d="M36.3333 69V64.3333H45.6667V57.1C43.7611 56.6722 42.0597 55.8653 40.5625 54.6792C39.0653 53.4931 37.9667 52.0056 37.2667 50.2167C34.35 49.8667 31.9097 48.5931 29.9458 46.3958C27.9819 44.1986 27 41.6222 27 38.6667V36.3333C27 35.05 27.4569 33.9514 28.3708 33.0375C29.2847 32.1236 30.3833 31.6667 31.6667 31.6667H36.3333V27H59.6667V31.6667H64.3333C65.6167 31.6667 66.7153 32.1236 67.6292 33.0375C68.5431 33.9514 69 35.05 69 36.3333V38.6667C69 41.6222 68.0181 44.1986 66.0542 46.3958C64.0903 48.5931 61.65 49.8667 58.7333 50.2167C58.0333 52.0056 56.9347 53.4931 55.4375 54.6792C53.9403 55.8653 52.2389 56.6722 50.3333 57.1V64.3333H59.6667V69H36.3333ZM36.3333 45.2V36.3333H31.6667V38.6667C31.6667 40.1444 32.0944 41.4764 32.95 42.6625C33.8056 43.8486 34.9333 44.6944 36.3333 45.2ZM48 52.6667C49.9444 52.6667 51.5972 51.9861 52.9583 50.625C54.3194 49.2639 55 47.6111 55 45.6667V31.6667H41V45.6667C41 47.6111 41.6806 49.2639 43.0417 50.625C44.4028 51.9861 46.0556 52.6667 48 52.6667ZM59.6667 45.2C61.0667 44.6944 62.1944 43.8486 63.05 42.6625C63.9056 41.4764 64.3333 40.1444 64.3333 38.6667V36.3333H59.6667V45.2Z" fill="#FFD700" />
+                        </svg>
+                        <div class="w-full flex flex-col items-center justify-center gap-3 text-center">
+                            <h3 class="text-2xl font-semibold">Quiz Completed!</h3>
+                            <h3 class="mb-6 text-body">You scored 30 out of 30, that's <span>100%</span>! Keep it up.</h3>
+                        </div>
+                        <div class="grid w-full gap-3 pb-6 md:grid-cols-1">
+                            <div for="hosting-small" class="inline-flex items-center justify-between w-full p-5 text-red-800 bg-red-50 border-1 border-red-200 rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 peer-checked:text-purple-900">
+                                <div class="block">
+                                    <div class="w-full">Answered 0 Incorrect</div>
+                                </div>
+                            </div>
+                            <div for="hosting-small" class="inline-flex items-center justify-between w-full p-5 text-green-800 bg-green-50 border-1 border-green-200 rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 peer-checked:text-purple-900">
+                                <div class="block">
+                                    <div class="w-full">Answered 30 Correct</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 justify-end gap-2">
+                            <button data-modal-hide="popup-modal" type="button" class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Retake</button>
+                            <button data-modal-hide="popup-modal" type="button" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                                Exit Quiz
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- QUIZ FORM -->
     <section class="w-full mt-20 ">
         <form action="" class="w-full relative px-[15px] flex flex-col pt-15 gap-15 max-w-screen-xl mx-auto items-center justify-center">
@@ -151,7 +194,7 @@
                     </div>
                 </div>
             </div>
-              <!-- FILL IN THE BLANKS -->
+            <!-- FILL IN THE BLANKS -->
             <div class=" rounded-[20px] w-full max-w-2xl flex flex-col gap-4 border-[1px] border-gray-300 p-[30px]">
                 <small class="text-sm w-full text-end font-medium">1/30</small>
                 <p class="text-lg w-full ">High speed storage elements used in the ___ for temporary storage of frequently used operands.</p>
@@ -164,11 +207,11 @@
                     </div>
                 </div>
             </div>
-              <!-- SUBMIT BUTTON -->
-               <div class="flex flex-col mb-5 gap-3 items-center justify-center text-center">
+            <!-- SUBMIT BUTTON -->
+            <div class="flex flex-col mb-5 gap-3 items-center justify-center text-center">
                 <p>Are you done with your quiz? Submit now to get the result</p>
                 <button type="button" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Submit Quiz</button>
-               </div>
+            </div>
         </form>
     </section>
 </body>
