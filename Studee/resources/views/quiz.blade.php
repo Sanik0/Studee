@@ -68,7 +68,7 @@
         </div>
     </section> --}}
     <!-- COMPLETION -->
-    <section>
+    {{-- <section>
         <div id="popup-modal" tabindex="-1" class=" overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] h-full max-h-full">
             <div class="relative p-4 w-full max-w-md max-h-full">
                 <div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
@@ -90,12 +90,12 @@
                         <div class="grid w-full gap-3 pb-6 md:grid-cols-1">
                             <div for="hosting-small" class="inline-flex items-center justify-between w-full p-5 text-red-800 bg-red-50 border-1 border-red-200 rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 peer-checked:text-purple-900">
                                 <div class="block">
-                                    <div class="w-full">Answered 0 Incorrect</div>
+                                    <div class="w-full">Answered 0 Incorrectly</div>
                                 </div>
                             </div>
                             <div for="hosting-small" class="inline-flex items-center justify-between w-full p-5 text-green-800 bg-green-50 border-1 border-green-200 rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 peer-checked:text-purple-900">
                                 <div class="block">
-                                    <div class="w-full">Answered 30 Correct</div>
+                                    <div class="w-full">Answered 30 Correctly</div>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- QUIZ FORM -->
     <section class="w-full mt-20 ">
         <form action="" class="w-full relative px-[15px] flex flex-col pt-15 gap-15 max-w-screen-xl mx-auto items-center justify-center">
@@ -204,6 +204,41 @@
                     <div class="relative">
                         <input type="text" id="search" class="block w-full p-3 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 shadow-xs placeholder:text-body" placeholder="Type your answer" required />
                         <button type="button" class="absolute end-1.5 bottom-1.5 text-white bg-purple-600 hover:bg-purple-800 box-border border border-transparent focus:ring-4 focus:ring-purple-200 shadow-xs font-medium leading-5 rounded text-xs px-3 py-1.5 focus:outline-none">Next</button>
+                    </div>
+                </div>
+            </div>
+            <!-- RESULT TEMPLATE -->
+            <div class=" rounded-[20px] bg-red-50 w-full max-w-2xl flex flex-col gap-4 border-[1px] border-red-300 p-[30px]">
+                <small class="text-sm w-full text-end font-medium">0 point</small>
+                <p class="text-lg w-full ">High speed storage elements used in the ___ for temporary storage of frequently used operands.</p>
+                <div class="w-full flex flex-col gap-1 mt-6">
+                    <h3 class="mb-3 text-sm font-medium text-gray-700">Your Answer</h3>
+                    <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                    <div class="relative">
+                        <input type="text" id="search" class="block w-full p-3 text-red-800 bg-neutral-secondary-medium border border-red-300 text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 shadow-xs placeholder:text-body" placeholder="Type your answer" value="Processor" disabled />
+                    </div>
+                    <div class="flex items-center gap-3 mt-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-red-600" viewBox="0 -960 960 960">
+                            <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                        </svg>
+                        <p class="text-red-800">Correct Answer: CPU</p>
+                    </div>
+                </div>
+            </div>
+            <div class=" rounded-[20px] bg-green-50 w-full max-w-2xl flex flex-col gap-4 border-[1px] border-green-300 p-[30px]">
+                <small class="text-sm w-full text-end font-medium">0 point</small>
+                <p class="text-lg w-full ">High speed storage elements used in the ___ for temporary storage of frequently used operands.</p>
+                <div class="w-full flex flex-col gap-1 mt-6">
+                    <h3 class="mb-3 text-sm font-medium text-gray-700">Your Answer</h3>
+                    <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                    <div class="relative">
+                        <input type="text" id="search" class="block w-full p-3 text-green-800 bg-neutral-secondary-medium border border-green-300 text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 shadow-xs placeholder:text-body" placeholder="Type your answer" value="Processor" disabled />
+                    </div>
+                    <div class="flex items-center gap-3 mt-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-green-600" viewBox="0 -960 960 960">
+                            <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                        </svg>
+                        <p class="text-green-800">Correct</p>
                     </div>
                 </div>
             </div>
