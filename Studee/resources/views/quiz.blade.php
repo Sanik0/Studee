@@ -36,7 +36,7 @@
                             <li>
                                 <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded" role="menuitem">
                                     <div class="inline-flex items-center">
-                                        <svg class="h-4 w-4 me-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
+                                        <svg class="h-4 w-4 me-1.5 fill-body" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
                                             <path d="M480-80q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-440h80q0 117 81.5 198.5T480-160q117 0 198.5-81.5T760-440q0-117-81.5-198.5T480-720h-6l62 62-56 58-160-160 160-160 56 58-62 62h6q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-440q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-80Z" />
                                         </svg>
                                         Restart Quiz
@@ -46,7 +46,7 @@
                             <li>
                                 <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded" role="menuitem">
                                     <div class="inline-flex items-center">
-                                        <svg class="h-4 w-4 me-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
+                                        <svg class="h-4 w-4 me-1.5 fill-body" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
                                             <path d="M480-80q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-440h80q0 117 81.5 198.5T480-160q117 0 198.5-81.5T760-440q0-117-81.5-198.5T480-720h-6l62 62-56 58-160-160 160-160 56 58-62 62h6q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-440q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-80Z" />
                                         </svg>
                                         Restart Quiz
@@ -56,7 +56,7 @@
                             <li>
                                 <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded" role="menuitem">
                                     <div class="inline-flex items-center">
-                                        <svg class="h-4 w-4 me-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
+                                        <svg class="h-4 w-4 me-1.5 fill-body" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
                                             <path d="M480-80q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-440h80q0 117 81.5 198.5T480-160q117 0 198.5-81.5T760-440q0-117-81.5-198.5T480-720h-6l62 62-56 58-160-160 160-160 56 58-62 62h6q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-440q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-80Z" />
                                         </svg>
                                         Restart Quiz
@@ -76,6 +76,55 @@
             </div>
         </div>
     </nav>
+    <!-- START -->
+    <section>
+        <div id="popup-modal" tabindex="-1" class=" overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] h-full max-h-full">
+            <div class="relative p-4 w-full max-w-xl max-h-full">
+                <div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
+                    <button type="button" class="absolute top-3 end-2.5 text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center" data-modal-hide="popup-modal">
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <div class="p-4 md:p-5 text-center">
+                        <div class="w-full flex border-b border-gray-300 py-3 flex-col items-start justify-start w-full gap-3 mb-6">
+                            <h3 class="text-md w-full text-start font-semibold">Introduction to Computer Architecture, Organization, and Programming Languages</h3>
+                        </div>
+                        <div class="grid w-full gap-3 pb-6 md:grid-cols-1">
+                            <div class="inline-flex w-full flex-col md:flex-row gap-3 p-5 text-sm text-red-800 border-1 border-gray-200 rounded-base cursor-pointer">
+                                <div class="rounded-[8px] w-fit mb-[7px] lg:mb-0 md:mb-0 group-peer-checked:bg-purple-200 flex items-center justify-center bg-gray-100 p-[7px]">
+                                    <svg class="group-peer-checked:fill-purple-500 fill-gray-700 h-6 w-6 fill-gray-800 w-fit" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.3335 5.83333C3.3335 5.3731 3.70659 5 4.16683 5H15.8335C16.2937 5 16.6668 5.3731 16.6668 5.83333C16.6668 6.29357 16.2937 6.66667 15.8335 6.66667H4.16683C3.70659 6.66667 3.3335 6.29357 3.3335 5.83333ZM3.3335 10C3.3335 9.53976 3.70659 9.16667 4.16683 9.16667H15.8335C16.2937 9.16667 16.6668 9.53976 16.6668 10C16.6668 10.4602 16.2937 10.8333 15.8335 10.8333H4.16683C3.70659 10.8333 3.3335 10.4602 3.3335 10ZM3.3335 14.1667C3.3335 13.7064 3.70659 13.3333 4.16683 13.3333H15.8335C16.2937 13.3333 16.6668 13.7064 16.6668 14.1667C16.6668 14.6269 16.2937 15 15.8335 15H4.16683C3.70659 15 3.3335 14.6269 3.3335 14.1667Z" />
+                                    </svg>
+                                </div>
+                                <div class="flex w-full items-start justify-start flex-col gap-1">
+                                    <div class="w-full text-gray-800 text-start font-semibold">20 Questions</div>
+                                    <small class="w-full text-gray-600 text-start">Choose the correct answer from a set of options to quickly test your knowledge.</small>
+                                </div>
+                            </div>
+                            <div class="inline-flex w-full flex-col md:flex-row gap-3 p-5 text-sm text-red-800 border-1 border-gray-200 rounded-base cursor-pointer">
+                                <div class="rounded-[8px] w-fit mb-[7px] lg:mb-0 md:mb-0 group-peer-checked:bg-purple-200 flex items-center justify-center bg-gray-100 p-[7px]">
+                                    <svg class="group-peer-checked:fill-purple-500 fill-gray-700 h-6 w-6 fill-gray-800 w-fit" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99984 3.33333C6.31794 3.33333 3.33317 6.3181 3.33317 10C3.33317 13.6819 6.31794 16.6667 9.99984 16.6667C13.6817 16.6667 16.6665 13.6819 16.6665 10C16.6665 6.3181 13.6817 3.33333 9.99984 3.33333ZM1.6665 10C1.6665 5.39763 5.39746 1.66667 9.99984 1.66667C14.6022 1.66667 18.3332 5.39763 18.3332 10C18.3332 14.6024 14.6022 18.3333 9.99984 18.3333C5.39746 18.3333 1.6665 14.6024 1.6665 10ZM10.0718 7.15231C9.7401 7.13964 9.41697 7.25925 9.17347 7.48482C8.92998 7.7104 8.78607 8.02346 8.7734 8.35514C8.75583 8.81504 8.36876 9.17363 7.90886 9.15606C7.44896 9.13849 7.09038 8.75142 7.10794 8.29152C7.13749 7.51814 7.47305 6.78816 8.04081 6.26218C8.60856 5.73621 9.36201 5.45731 10.1354 5.48686C10.9088 5.5164 11.6388 5.85196 12.1647 6.41972C12.6884 6.98503 12.9672 7.73443 12.9404 8.50431C12.9338 8.8827 12.8522 9.25606 12.7005 9.60283C12.5474 9.95267 12.3259 10.2684 12.0491 10.5314C11.7722 10.7945 11.4456 10.9995 11.0884 11.1346C11.0045 11.1663 10.9193 11.194 10.8332 11.2176V11.6667C10.8332 12.1269 10.4601 12.5 9.99984 12.5C9.5396 12.5 9.1665 12.1269 9.1665 11.6667V10.485C9.1665 10.2586 9.25859 10.042 9.42159 9.88494C9.58458 9.72787 9.80446 9.64386 10.0307 9.65224C10.1904 9.65815 10.3496 9.63209 10.4991 9.57558C10.6485 9.51908 10.7852 9.43328 10.901 9.32321C11.0169 9.21314 11.1096 9.08103 11.1736 8.93465C11.2377 8.78826 11.2718 8.63054 11.2741 8.47077L11.2746 8.45069C11.2873 8.11901 11.1677 7.79588 10.9421 7.55238C10.7165 7.30889 10.4035 7.16498 10.0718 7.15231ZM9.15816 14.1732C9.15816 13.7129 9.53126 13.3398 9.9915 13.3398H9.99983C10.4601 13.3398 10.8332 13.7129 10.8332 14.1732C10.8332 14.6334 10.4601 15.0065 9.99983 15.0065H9.9915C9.53126 15.0065 9.15816 14.6334 9.15816 14.1732Z" />
+                                    </svg>
+                                </div>
+                                <div class="flex w-full items-start justify-start flex-col gap-1">
+                                    <div class="w-full text-gray-800 text-start font-semibold">Multple Choice</div>
+                                    <small class="w-full text-gray-600 text-start">Choose the correct answer from a set of options to quickly test your knowledge.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 justify-end gap-2">
+                            <button data-modal-hide="popup-modal" type="button" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                                Start Quiz
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- MODAL -->
     {{-- <section>
         <div id="popup-modal" tabindex="-1" class=" overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] h-full max-h-full">
@@ -91,11 +140,11 @@
                         <svg class="mx-auto mb-4 text-fg-disabled w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
-                        <h3 class="mb-6 text-body">We couldn’t process your file. Please ensure it’s valid and contains readable text that can be extracted.</h3>
+                        <h3 class="mb-6 text-body">Are you sure you want to exit? your quiz and progress is not saved.</h3>
                         <div class="flex items-center space-x-4 justify-center">
                             <button data-modal-hide="popup-modal" type="button" class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Retry</button>
                             <button data-modal-hide="popup-modal" type="button" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                                Understood
+                                Exit Quiz
                             </button>
                         </div>
                     </div>
@@ -136,7 +185,11 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-4 justify-end gap-2">
-                            <button data-modal-hide="popup-modal" type="button" class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Retake</button>
+                            <button data-modal-hide="popup-modal" type="button" class="text-body flex items-center bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                                <svg class="h-4 w-4 me-1.5 fill-body" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
+                                    <path d="M480-80q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-440h80q0 117 81.5 198.5T480-160q117 0 198.5-81.5T760-440q0-117-81.5-198.5T480-720h-6l62 62-56 58-160-160 160-160 56 58-62 62h6q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-440q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-80Z" />
+                                </svg>
+                                Retake</button>
                             <button data-modal-hide="popup-modal" type="button" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                                 Exit Quiz
                             </button>
@@ -255,7 +308,7 @@
                     </div>
                     <div class="flex items-center gap-3 mt-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-red-600" viewBox="0 -960 960 960">
-                            <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                            <path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
                         </svg>
                         <p class="text-red-800">Correct Answer: CPU</p>
                     </div>

@@ -175,7 +175,7 @@
     </section>
     <!-- FORMS -->
     <section class="w-full justify-center align-center flex px-[15px] py-[50px]">
-        <!-- UPLOAD FORM -->
+          <!-- UPLOAD FORM -->
         {{-- <form action="" class="w-full max-w-screen-sm gap-[20px] justify-center items-end flex flex-col">
             <!-- FILE UPLOAD -->
             <div class="flex items-center justify-center w-full">
