@@ -43,26 +43,6 @@
                                     </div>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded" role="menuitem">
-                                    <div class="inline-flex items-center">
-                                        <svg class="h-4 w-4 me-1.5 fill-body" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
-                                            <path d="M480-80q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-440h80q0 117 81.5 198.5T480-160q117 0 198.5-81.5T760-440q0-117-81.5-198.5T480-720h-6l62 62-56 58-160-160 160-160 56 58-62 62h6q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-440q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-80Z" />
-                                        </svg>
-                                        Restart Quiz
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded" role="menuitem">
-                                    <div class="inline-flex items-center">
-                                        <svg class="h-4 w-4 me-1.5 fill-body" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
-                                            <path d="M480-80q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-440h80q0 117 81.5 198.5T480-160q117 0 198.5-81.5T760-440q0-117-81.5-198.5T480-720h-6l62 62-56 58-160-160 160-160 56 58-62 62h6q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-440q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-80Z" />
-                                        </svg>
-                                        Restart Quiz
-                                    </div>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -77,7 +57,7 @@
         </div>
     </nav>
     <!-- START -->
-    <section>
+    {{-- <section>
         <div id="popup-modal" tabindex="-1" class=" overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] h-full max-h-full">
             <div class="relative p-4 w-full max-w-xl max-h-full">
                 <div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
@@ -124,7 +104,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- MODAL -->
     {{-- <section>
         <div id="popup-modal" tabindex="-1" class=" overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] h-full max-h-full">
@@ -321,7 +301,7 @@
                     <h3 class="mb-3 text-sm font-medium text-gray-700">Your Answer</h3>
                     <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div class="relative">
-                        <input type="text" id="search" class="block w-full p-3 text-green-800 bg-neutral-secondary-medium border border-green-300 text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 shadow-xs placeholder:text-body" placeholder="Type your answer" value="CPU" disabled />
+                        <input type="text" id="search" class="block w-full p-3 text-green-800 bg-neutral-secondary-medium border border-green-300 text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 shadow-xs placeholder:text-body" placeholder="Type your answer" value="CPU" disabled />
                     </div>
                     <div class="flex items-center gap-3 mt-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-green-600" viewBox="0 -960 960 960">
