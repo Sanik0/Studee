@@ -178,40 +178,81 @@
     <!-- FORMS -->
     <section class="w-full justify-center align-center flex px-[15px] py-[50px]">
         <!-- UPLOAD FORM -->
-        {{-- <form action="" class="w-full max-w-screen-sm gap-[20px] justify-center items-end flex flex-col">
-            <!-- FILE UPLOAD -->
-            <div class="flex items-center justify-center w-full">
-                <div class="flex flex-col items-center justify-center w-full h-64 bg-neutral-secondary-medium border border-dashed border-purple-600 rounded-base">
-                    <div class="flex flex-col items-center justify-center text-body pt-5 pb-6">
-                        <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v9m-5 0H5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-2M8 9l4-5 4 5m1 8h.01" />
-                        </svg>
-                        <p class="mb-2 text-sm">Click the button below to upload</p>
-                        <p class="text-xs mb-4">Max. File Size: <span class="font-semibold">10MB</span></p>
-                        <button type="button" onclick="document.getElementById('dropzone-file-2').click()" class="inline-flex items-center text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none">
-                            <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
-                            </svg>
-                            Browse file
-                        </button>
-                    </div>
-                </div> 
-                <input id="dropzone-file-2" type="file" class="hidden" />
-            </div>
-            <!-- PROMPT -->
-            <textarea id="prompt" rows="4" class="bg-neutral-secondary-medium border border-purple-400 text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 resize-none h-[250px] block w-full p-3.5 shadow-xs placeholder:text-body" placeholder="Generate a computer science quiz focusing on fundamentals such as algorithms, data structures, programming concepts, and basic computer systems. "></textarea>
-            <p class="mt-2 text-sm text-gray-500">
-                <span id="count">0</span> / 300
-            </p>
-            <button disabled type="button" class="inline-flex w-fit items-center disabled:bg-purple-800 disabled:cursor-not-allowed text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-                Next Step
-                <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
+        <form action="{{ route('quiz.extract') }}" method="POST" enctype="multipart/form-data" class="w-full max-w-screen-sm gap-[20px] justify-center items-end flex flex-col">
+    @csrf
+
+    <!-- Error handling -->
+    @if(session('error'))
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 w-full">
+        {{ session('error') }}
+    </div>
+    @endif
+
+    @if($errors->any())
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 w-full">
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <!-- FILE UPLOAD -->
+    <div class="flex items-center justify-center w-full relative">
+        <label for="dropzone-file-2" class="flex flex-col items-center justify-center w-full h-64 bg-neutral-secondary-medium border border-dashed border-purple-600 rounded-base cursor-pointer hover:bg-gray-50">
+            <div class="flex flex-col items-center justify-center text-body pt-5 pb-6">
+                <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v9m-5 0H5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-2M8 9l4-5 4 5m1 8h.01" />
                 </svg>
-            </button>
-        </form> --}}
+                <p class="mb-2 text-sm">Click the button below to upload</p>
+                <p class="text-xs mb-2">Supported: <span class="font-semibold">PDF, DOCX, DOC</span></p>
+                <p class="text-xs mb-4">Max. File Size: <span class="font-semibold">10MB</span></p>
+                
+                <!-- Display selected file name -->
+                <p id="file-name" class="text-sm text-purple-600 font-semibold mb-3 hidden"></p>
+                
+                <button type="button" onclick="document.getElementById('dropzone-file-2').click()" class="inline-flex items-center text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none">
+                    <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                    </svg>
+                    Browse file
+                </button>
+            </div>
+        </label>
+        <!-- File input MUST be inside the form -->
+        <input id="dropzone-file-2" name="file" type="file" accept=".pdf,.docx,.doc" class="hidden" />
+    </div>
+
+    <button id="submit-btn" disabled type="submit" class="inline-flex w-fit items-center disabled:bg-purple-800 disabled:cursor-not-allowed text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+        Extract Text
+        <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
+        </svg>
+    </button>
+</form>
+
+<script>
+    const fileInput = document.getElementById('dropzone-file-2');
+    const submitBtn = document.getElementById('submit-btn');
+    const fileNameDisplay = document.getElementById('file-name');
+
+    fileInput.addEventListener('change', function(e) {
+        if (e.target.files.length > 0) {
+            const fileName = e.target.files[0].name;
+            const fileSize = (e.target.files[0].size / 1024 / 1024).toFixed(2);
+            
+            fileNameDisplay.textContent = `Selected: ${fileName} (${fileSize} MB)`;
+            fileNameDisplay.classList.remove('hidden');
+            submitBtn.disabled = false;
+        } else {
+            fileNameDisplay.classList.add('hidden');
+            submitBtn.disabled = true;
+        }
+    });
+</script>
         <!-- CHOOSE FORM -->
-        <form action="" class="w-full max-w-screen-sm gap-[15px] justify-center items-end flex flex-col">
+        {{-- <form action="" class="w-full max-w-screen-sm gap-[15px] justify-center items-end flex flex-col">
             <h2 class="mb-6 text-2xl w-full flex items-start font-bold tracking-tighter text-heading md:text-3xl lg:text-4xl">What type of quiz do you want</h2>
             <div class="flex flex-col w-full gap-[20px]">
                 <ul class="select-none w-full gap-4 flex flex-col">
@@ -295,7 +336,7 @@
                     </svg>
                 </button>
             </div>
-        </form>
+        </form> --}}
         <!-- GENERATING -->
         {{-- <div class="w-full max-w-screen-sm flex flex-col items-center justify-center px-[15px]">
             <dotlottie-player
@@ -311,7 +352,6 @@
             <div class="w-full bg-neutral-quaternary rounded-full h-3">
                 <div class="bg-purple-600 h-3 rounded-full" style="width: 45%"></div>
             </div>
-
         </div> --}}
     </section>
     <!-- HERO -->
@@ -1279,19 +1319,19 @@
 
             <div class="w-full flex items-center justify-between flex-wrap">
 
-                <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base shadow-xs">
+                <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base">
                     <img class="rounded-base" src="{{asset('images/file.png')}}" alt="" />
                     <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">Upload file or enter a prompt</h5>
                     <p class="mb-6 text-body">You can start creating your quiz by either uploading files like PDF, DOCS, PPT. or you can enter your own prompt to study.</p>
                 </div>
 
-                <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base shadow-xs">
+                <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base">
                     <img class="rounded-base" src="{{asset('images/select.png')}}" alt="" />
                     <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">Select quiz preferences</h5>
                     <p class="mb-6 text-body">Select your quiz preferences, like the amount of questions, language, and the type of quiz you want.</p>
                 </div>
 
-                <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base shadow-xs">
+                <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base">
                     <img class="rounded-base" src="{{asset('images/quiz.png')}}" alt="" />
                     <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">Start learning</h5>
                     <p class="mb-6 text-body">After clicking generate, wait for a few seconds and then your can now start learning with ease.</p>
