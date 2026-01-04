@@ -1334,8 +1334,12 @@
 
                 <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base">
                     <img class="rounded-base max-w-[123px]" src="{{asset('images/responsive.png')}}" alt="" />
-                    <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">Create quizzes on any device</h5>
-                    <p class="mb-6 text-body">Create and access quizzes anytime using any device. be it your computer or your phone, studee makes it easy to study, practice, and learn wherever you are.</p>
+                    <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">
+                        AI-powered quiz generation
+                    </h5>
+                   <p class="mb-6 text-body">
+                        Simply upload a file or describe what you want to study, and Studee’s AI instantly creates accurate, engaging quizzes tailored to your content—saving you time while helping you focus on learning.
+                    </p>
                 </div>
 
                 <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base">
@@ -1562,16 +1566,16 @@
 <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 <script>
-    const textarea = document.getElementById('prompt');
-    const counter = document.getElementById('count');
-    const maxChars = 300;
+    const textarea1 = document.getElementById('prompt');
+    const counter1 = document.getElementById('count');
+    const maxChars1 = 300;
 
-    textarea.addEventListener('input', () => {
-        if (textarea.value.length > maxChars) {
-            textarea.value = textarea.value.slice(0, maxChars);
+    textarea1.addEventListener('input', () => {
+        if (textarea1.value.length > maxChars1) {
+            textarea1.value = textarea1.value.slice(0, maxChars1);
         }
 
-        counter.textContent = textarea.value.length;
+        counter1.textContent = textarea1.value.length;
     });
 </script>
 
