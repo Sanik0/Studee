@@ -193,7 +193,7 @@
                             <input type="radio" id="hosting-small" name="hosting" value="hosting-small" class="hidden peer" required />
                             <label for="hosting-small" class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-900">
                                 <div class="block">
-                                    <div class="w-full">Good for small websites</div>
+                                    <div class="w-full">Registers</div>
                                 </div>
                             </label>
                         </li>
@@ -201,7 +201,7 @@
                             <input type="radio" id="hosting-big" name="hosting" value="hosting-big" class="hidden peer">
                             <label for="hosting-big" class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-900">
                                 <div class="block">
-                                    <div class="w-full">Good for large websites</div>
+                                    <div class="w-full">MSB</div>
                                 </div>
                             </label>
                         </li>
@@ -209,7 +209,7 @@
                             <input type="radio" id="hosting-big" name="hosting" value="hosting-big" class="hidden peer">
                             <label for="hosting-big" class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-900">
                                 <div class="block">
-                                    <div class="w-full">Good for large websites</div>
+                                    <div class="w-full">emu8086</div>
                                 </div>
                             </label>
                         </li>
@@ -217,7 +217,7 @@
                             <input type="radio" id="hosting-big" name="hosting" value="hosting-big" class="hidden peer">
                             <label for="hosting-big" class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-900">
                                 <div class="block">
-                                    <div class="w-full">Good for large websites</div>
+                                    <div class="w-full">CPU</div>
                                 </div>
                             </label>
                         </li>
