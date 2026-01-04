@@ -1409,7 +1409,7 @@ Studee lets you generate quizzes instantly without signing up or logging in, so 
                 </h2>
                 <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
                     <div class="py-5 text-body border-b border-default">
-                        <p class="mb-2">TYou can create quizzes using a variety of common file types.
+                        <p class="mb-2">You can create quizzes using a variety of common file types.
 Studee supports files like PDF, DOCX, PPT, and text files, allowing you to upload your study materials and instantly turn them into quizzes using AI. You can also create quizzes by simply entering a topic or prompt—no file required.</p>
                     </div>
                 </div>
@@ -1446,9 +1446,9 @@ Whether it’s school subjects, professional skills, hobbies, or general knowled
     </section>
     <!-- CALL TO ACTION -->
     <section class="bg-neutral-primary px-[15px] py-8 lg:py-20">
-        <div class="py-8 max-w-screen-xl rounded-3xl bg-[#2E1065] px-4 mx-auto max-w-screen-2xl text-center lg:py-20">
+        <div class="py-8 flex items-center justify-center flex-col max-w-screen-xl rounded-3xl bg-[#2E1065] px-4 mx-auto max-w-screen-2xl text-center lg:py-20">
             <h1 class="mb-6 text-4xl font-bold tracking-tighter text-white text-heading md:text-5xl lg:text-6xl">Make Your Learning Effortless</h1>
-            <p class="mb-8 text-gray-400 font-normal text-body md:text-xl">Upload your notes and files or use a prompt to generate quizzes instantly, and study smarter with tools designed to make learning easier.</p>
+            <p class="mb-8 text-gray-400 max-w-3xl font-normal text-body md:text-xl">Upload your notes and files or use a prompt to generate quizzes instantly, and study smarter with tools designed to make learning easier.</p>
             <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 md:space-x-4">
                 <button type="button" class="inline-flex items-center justify-center text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-200 shadow-xs font-medium rounded-base text-base px-5 py-3 focus:outline-none">
                     Getting started
