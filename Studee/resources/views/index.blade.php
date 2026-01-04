@@ -187,7 +187,7 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v9m-5 0H5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-2M8 9l4-5 4 5m1 8h.01" />
                         </svg>
                         <p class="mb-2 text-sm">Click the button below to upload</p>
-                        <p class="text-xs mb-4">Max. File Size: <span class="font-semibold">30MB</span></p>
+                        <p class="text-xs mb-4">Max. File Size: <span class="font-semibold">10MB</span></p>
                         <button type="button" onclick="document.getElementById('dropzone-file-2').click()" class="inline-flex items-center text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none">
                             <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
@@ -1280,7 +1280,7 @@
             <div class="w-full flex items-center justify-between flex-wrap">
 
                 <div class="bg-neutral-primary-soft block max-w-sm p-6 rounded-base shadow-xs">
-                    <img class="rounded-base" src="{{asset('images/step1.png')}}" alt="" />
+                    <img class="rounded-base" src="{{asset('images/file.png')}}" alt="" />
                     <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">Upload file or enter a prompt</h5>
                     <p class="mb-6 text-body">You can start creating your quiz by either uploading files like PDF, DOCS, PPT. or you can enter your own prompt to study.</p>
                 </div>
