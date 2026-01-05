@@ -124,12 +124,13 @@
             </div>
         </div>
     </nav>
-    <!-- MODAL -->
-    {{-- <section>
-        <div id="popup-modal" tabindex="-1" class=" overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] h-full max-h-full">
+   <!-- MODAL -->
+    @if(session('error'))
+    <section>
+        <div id="popup-modal" tabindex="-1" class="overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] h-full max-h-full">
             <div class="relative p-4 w-full max-w-md max-h-full">
                 <div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
-                    <button type="button" class="absolute top-3 end-2.5 text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center" data-modal-hide="popup-modal">
+                    <button type="button" onclick="document.getElementById('popup-modal').remove()" class="absolute top-3 end-2.5 text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center">
                         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
                         </svg>
@@ -139,10 +140,9 @@
                         <svg class="mx-auto mb-4 text-fg-disabled w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
-                        <h3 class="mb-6 text-body">We couldn’t process your file. Please ensure it’s valid and contains readable text that can be extracted.</h3>
+                        <h3 class="mb-6 text-body">{{ session('error')}}</h3>
                         <div class="flex items-center space-x-4 justify-center">
-                            <button data-modal-hide="popup-modal" type="button" class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Retry</button>
-                            <button data-modal-hide="popup-modal" type="button" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                            <button onclick="document.getElementById('popup-modal').remove()" type="button" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                                 Understood
                             </button>
                         </div>
@@ -150,7 +150,8 @@
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
+    @endif
     <!-- CALL TO ACTION -->
     <section class="relative overflow-hidden mt-[65px] ">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-10 z-10 relative">
@@ -177,182 +178,43 @@
     </section>
     <!-- FORMS -->
     <section class="w-full justify-center align-center flex px-[15px] py-[50px]">
-        <!-- UPLOAD FORM -->
+        <!-- TEST CLAUDE -->
         <form action="{{ route('quiz.extract') }}" method="POST" enctype="multipart/form-data" class="w-full max-w-screen-sm gap-[20px] justify-center items-end flex flex-col">
-    @csrf
+            @csrf
+            <!-- FILE UPLOAD -->
+            <div class="flex items-center justify-center w-full relative">
+                <label for="dropzone-file-2" class="flex flex-col items-center justify-center w-full h-64 bg-neutral-secondary-medium border border-dashed border-purple-600 rounded-base cursor-pointer hover:bg-gray-50">
+                    <div class="flex flex-col items-center justify-center text-body pt-5 pb-6">
+                        <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v9m-5 0H5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-2M8 9l4-5 4 5m1 8h.01" />
+                        </svg>
+                        <p class="mb-2 text-sm">Click the button below to upload</p>
+                        <p class="text-xs mb-2">Supported: <span class="font-semibold">PDF, DOCX, DOC</span></p>
+                        <p class="text-xs mb-4">Max. File Size: <span class="font-semibold">10MB</span></p>
+                        
+                        <!-- Display selected file name -->
+                        <p id="file-name" class="text-sm text-purple-600 font-semibold mb-3 hidden"></p>
+                        
+                        <button type="button" onclick="document.getElementById('dropzone-file-2').click()" class="inline-flex items-center text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none">
+                            <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                            </svg>
+                            Browse file
+                        </button>
+                    </div>
+                </label>
+                <!-- File input MUST be inside the form -->
+                <input id="dropzone-file-2" name="file" type="file" accept=".pdf,.docx,.doc" class="hidden" />
+            </div>
 
-    <!-- Error handling -->
-    @if(session('error'))
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 w-full">
-        {{ session('error') }}
-    </div>
-    @endif
-
-    @if($errors->any())
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 w-full">
-        <ul>
-            @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
-    <!-- FILE UPLOAD -->
-    <div class="flex items-center justify-center w-full relative">
-        <label for="dropzone-file-2" class="flex flex-col items-center justify-center w-full h-64 bg-neutral-secondary-medium border border-dashed border-purple-600 rounded-base cursor-pointer hover:bg-gray-50">
-            <div class="flex flex-col items-center justify-center text-body pt-5 pb-6">
-                <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v9m-5 0H5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-2M8 9l4-5 4 5m1 8h.01" />
+            <button id="submit-btn" disabled type="submit" class="inline-flex w-fit items-center disabled:bg-purple-800 disabled:cursor-not-allowed text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                Next Step
+                <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
                 </svg>
-                <p class="mb-2 text-sm">Click the button below to upload</p>
-                <p class="text-xs mb-2">Supported: <span class="font-semibold">PDF, DOCX, DOC</span></p>
-                <p class="text-xs mb-4">Max. File Size: <span class="font-semibold">10MB</span></p>
-                
-                <!-- Display selected file name -->
-                <p id="file-name" class="text-sm text-purple-600 font-semibold mb-3 hidden"></p>
-                
-                <button type="button" onclick="document.getElementById('dropzone-file-2').click()" class="inline-flex items-center text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none">
-                    <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
-                    </svg>
-                    Browse file
-                </button>
-            </div>
-        </label>
-        <!-- File input MUST be inside the form -->
-        <input id="dropzone-file-2" name="file" type="file" accept=".pdf,.docx,.doc" class="hidden" />
-    </div>
-
-    <button id="submit-btn" disabled type="submit" class="inline-flex w-fit items-center disabled:bg-purple-800 disabled:cursor-not-allowed text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-        Extract Text
-        <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
-        </svg>
-    </button>
-</form>
-
-<script>
-    const fileInput = document.getElementById('dropzone-file-2');
-    const submitBtn = document.getElementById('submit-btn');
-    const fileNameDisplay = document.getElementById('file-name');
-
-    fileInput.addEventListener('change', function(e) {
-        if (e.target.files.length > 0) {
-            const fileName = e.target.files[0].name;
-            const fileSize = (e.target.files[0].size / 1024 / 1024).toFixed(2);
-            
-            fileNameDisplay.textContent = `Selected: ${fileName} (${fileSize} MB)`;
-            fileNameDisplay.classList.remove('hidden');
-            submitBtn.disabled = false;
-        } else {
-            fileNameDisplay.classList.add('hidden');
-            submitBtn.disabled = true;
-        }
-    });
-</script>
-        <!-- CHOOSE FORM -->
-        {{-- <form action="" class="w-full max-w-screen-sm gap-[15px] justify-center items-end flex flex-col">
-            <h2 class="mb-6 text-2xl w-full flex items-start font-bold tracking-tighter text-heading md:text-3xl lg:text-4xl">What type of quiz do you want</h2>
-            <div class="flex flex-col w-full gap-[20px]">
-                <ul class="select-none w-full gap-4 flex flex-col">
-                    <li>
-                        <input type="radio" id="react-option" value="react-option" name="technologies" class="hidden peer" required="" checked>
-                        <label for="react-option" class="inline-flex group items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-200 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-800">
-                            <div class="flex flex-col lg:flex-row lg:gap-4 gap-0 items-start lg:items-center">
-                                <div class="rounded-[8px] mb-[7px] lg:mb-0 md:mb-0 group-peer-checked:bg-purple-200 flex items-center justify-center bg-gray-100 p-[7px]">
-                                    <svg class="group-peer-checked:fill-purple-500 fill-gray-700" width="30" height="30" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.3335 5.83333C3.3335 5.3731 3.70659 5 4.16683 5H15.8335C16.2937 5 16.6668 5.3731 16.6668 5.83333C16.6668 6.29357 16.2937 6.66667 15.8335 6.66667H4.16683C3.70659 6.66667 3.3335 6.29357 3.3335 5.83333ZM3.3335 10C3.3335 9.53976 3.70659 9.16667 4.16683 9.16667H15.8335C16.2937 9.16667 16.6668 9.53976 16.6668 10C16.6668 10.4602 16.2937 10.8333 15.8335 10.8333H4.16683C3.70659 10.8333 3.3335 10.4602 3.3335 10ZM3.3335 14.1667C3.3335 13.7064 3.70659 13.3333 4.16683 13.3333H15.8335C16.2937 13.3333 16.6668 13.7064 16.6668 14.1667C16.6668 14.6269 16.2937 15 15.8335 15H4.16683C3.70659 15 3.3335 14.6269 3.3335 14.1667Z" />
-                                    </svg>
-                                </div>
-                                <div class="flex flex-col gap-0 lg:gap-1">
-                                    <div class="w-full font-medium mb-1">Multiple Choice</div>
-                                    <div class="w-full text-sm">Choose the correct answer from a set of options to quickly test your knowledge.</div>
-                                </div>
-                            </div>
-                        </label>
-                    </li>
-                    <li>
-                        <input type="radio" id="vue-option" value="vue-option" name="technologies" class="hidden peer">
-                        <label for="vue-option" class="inline-flex group items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-200 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-800">
-                            <div class="flex flex-col lg:flex-row lg:gap-4 gap-0 items-start lg:items-center">
-                                <div class="rounded-[8px] mb-[7px] lg:mb-0 md:mb-0 group-peer-checked:bg-purple-200 flex items-center justify-center bg-gray-100 p-[7px]">
-                                    <svg width="30" height="30" class="group-peer-checked:fill-purple-500 fill-gray-700" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99984 3.33333C6.31794 3.33333 3.33317 6.3181 3.33317 10C3.33317 13.6819 6.31794 16.6667 9.99984 16.6667C13.6817 16.6667 16.6665 13.6819 16.6665 10C16.6665 6.3181 13.6817 3.33333 9.99984 3.33333ZM1.6665 10C1.6665 5.39763 5.39746 1.66667 9.99984 1.66667C14.6022 1.66667 18.3332 5.39763 18.3332 10C18.3332 14.6024 14.6022 18.3333 9.99984 18.3333C5.39746 18.3333 1.6665 14.6024 1.6665 10ZM10.0718 7.15231C9.7401 7.13964 9.41697 7.25925 9.17347 7.48482C8.92998 7.7104 8.78607 8.02346 8.7734 8.35514C8.75583 8.81504 8.36876 9.17363 7.90886 9.15606C7.44896 9.13849 7.09038 8.75142 7.10794 8.29152C7.13749 7.51814 7.47305 6.78816 8.04081 6.26218C8.60856 5.73621 9.36201 5.45731 10.1354 5.48686C10.9088 5.5164 11.6388 5.85196 12.1647 6.41972C12.6884 6.98503 12.9672 7.73443 12.9404 8.50431C12.9338 8.8827 12.8522 9.25606 12.7005 9.60283C12.5474 9.95267 12.3259 10.2684 12.0491 10.5314C11.7722 10.7945 11.4456 10.9995 11.0884 11.1346C11.0045 11.1663 10.9193 11.194 10.8332 11.2176V11.6667C10.8332 12.1269 10.4601 12.5 9.99984 12.5C9.5396 12.5 9.1665 12.1269 9.1665 11.6667V10.485C9.1665 10.2586 9.25859 10.042 9.42159 9.88494C9.58458 9.72787 9.80446 9.64386 10.0307 9.65224C10.1904 9.65815 10.3496 9.63209 10.4991 9.57558C10.6485 9.51908 10.7852 9.43328 10.901 9.32321C11.0169 9.21314 11.1096 9.08103 11.1736 8.93465C11.2377 8.78826 11.2718 8.63054 11.2741 8.47077L11.2746 8.45069C11.2873 8.11901 11.1677 7.79588 10.9421 7.55238C10.7165 7.30889 10.4035 7.16498 10.0718 7.15231ZM9.15816 14.1732C9.15816 13.7129 9.53126 13.3398 9.9915 13.3398H9.99983C10.4601 13.3398 10.8332 13.7129 10.8332 14.1732C10.8332 14.6334 10.4601 15.0065 9.99983 15.0065H9.9915C9.53126 15.0065 9.15816 14.6334 9.15816 14.1732Z" />
-                                    </svg>
-                                </div>
-                                <div class="flex flex-col gap-0 lg:gap-1">
-                                    <div class="w-full font-medium mb-1">True or False</div>
-                                    <div class="w-full text-sm">Test your understanding by deciding whether each statement is correct or incorrect.</div>
-                                </div>
-                            </div>
-                        </label>
-                    </li>
-                    <li>
-                        <input type="radio" id="angular-option" value="angular-option" name="technologies" class="hidden peer">
-                        <label for="angular-option" class="inline-flex group items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-200 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-800">
-                            <div class="flex flex-col lg:flex-row lg:gap-4 gap-0 items-start lg:items-center">
-                                <div class="rounded-[8px] mb-[7px] lg:mb-0 md:mb-0 group-peer-checked:bg-purple-200 flex items-center justify-center bg-gray-100 p-[7px]">
-                                    <svg class="group-peer-checked:fill-purple-500 fill-gray-700" width="30" height="30" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.33317 3.33333C5.57175 3.33333 3.33317 5.57191 3.33317 8.33333C3.33317 11.0948 5.57175 13.3333 8.33317 13.3333C11.0946 13.3333 13.3332 11.0948 13.3332 8.33333C13.3332 5.57191 11.0946 3.33333 8.33317 3.33333ZM1.6665 8.33333C1.6665 4.65144 4.65127 1.66667 8.33317 1.66667C12.0151 1.66667 14.9998 4.65144 14.9998 8.33333C14.9998 12.0152 12.0151 15 8.33317 15C4.65127 15 1.6665 12.0152 1.6665 8.33333ZM13.9939 13.9941C14.3194 13.6686 14.847 13.6686 15.1724 13.9941L18.0891 16.9107C18.4145 17.2362 18.4145 17.7638 18.0891 18.0893C17.7637 18.4147 17.236 18.4147 16.9106 18.0893L13.9939 15.1726C13.6685 14.8472 13.6685 14.3195 13.9939 13.9941Z" />
-                                    </svg>
-                                </div>
-                                <div class="flex flex-col gap-0 lg:gap-1">
-                                    <div class="w-full font-medium mb-1">Identification</div>
-                                    <div class="w-full text-sm">Type the correct term or answer that best matches the given question or description.</div>
-                                </div>
-                            </div>
-                        </label>
-                    </li>
-                    <li>
-                        <input type="radio" id="flutter-option" value="flutter-option" name="technologies" class="hidden peer">
-                        <label for="flutter-option" class="inline-flex group items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-200 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-800">
-                            <div class="flex flex-col lg:flex-row lg:gap-4 gap-0 items-start lg:items-center">
-                                <div class="rounded-[8px] mb-[7px] lg:mb-0 md:mb-0 group-peer-checked:bg-purple-200 flex items-center justify-center bg-gray-100 p-[7px]">
-                                    <svg class="group-peer-checked:fill-purple-500 fill-gray-700" width="30" height="30" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.3388 2.5C12.5598 2.5 12.7718 2.5878 12.928 2.74408L17.2559 7.07203C17.5814 7.39747 17.5814 7.9251 17.2559 8.25054L15.0813 10.4252C14.925 10.5815 14.713 10.6693 14.492 10.6693C14.4677 10.6693 14.4435 10.6683 14.4195 10.6662L13.1074 14.1638C13.021 14.3944 12.837 14.5749 12.6048 14.6569L4.69318 17.4524C4.39049 17.5593 4.05329 17.4829 3.82629 17.2559L2.7441 16.1737C2.5171 15.9467 2.44068 15.6095 2.54763 15.3068L5.34311 7.39511C5.42513 7.16296 5.60562 6.97897 5.83615 6.89249L9.33389 5.58039C9.31339 5.3437 9.39371 5.09993 9.57484 4.91879L11.7495 2.74408C11.9058 2.5878 12.1178 2.5 12.3388 2.5ZM14.492 8.65748L15.4882 7.66128L12.3388 4.51185L11.3426 5.50805L14.492 8.65748ZM10.4271 6.95038L6.78517 8.31656L4.75273 14.0688L8.07506 10.7464C8.4005 10.4209 8.92814 10.4209 9.25358 10.7464C9.57901 11.0718 9.57902 11.5995 9.25358 11.9249L5.93122 15.2473L11.6834 13.2148L13.0495 9.57286L10.4271 6.95038Z" />
-                                    </svg>
-                                </div>
-                                <div class="flex flex-col gap-0 lg:gap-1">
-                                    <div class="w-full font-medium mb-1">Fill in the blank</div>
-                                    <div class="w-full text-sm">Complete the sentence by filling in the missing word or phrase.</div>
-                                </div>
-                            </div>
-                        </label>
-                    </li>
-                </ul>
-            </div>
-            <div class="w-full flex flex-col-reverse lg:flex-row md:flex-row gap-4 md:gap-0 lg:gap-0 justify-between items-center">
-                <button type="button" class="inline-flex items-center justify-center lg:w-fit md:w-fit w-full items-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-base md:text-sm lg:text-sm  px-5 md:py-2.5 lg:py-2.5 py-4 focus:outline-none">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.70711 7.29289C10.0976 7.68342 10.0976 8.31658 9.70711 8.70711L7.41421 11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H7.41421L9.70711 15.2929C10.0976 15.6834 10.0976 16.3166 9.70711 16.7071C9.31658 17.0976 8.68342 17.0976 8.29289 16.7071L4.29289 12.7071C3.90237 12.3166 3.90237 11.6834 4.29289 11.2929L8.29289 7.29289C8.68342 6.90237 9.31658 6.90237 9.70711 7.29289Z" fill="#101828" />
-                    </svg>
-                    Go Back
-                </button>
-                <button type="button" class="inline-flex items-center justify-center lg:w-fit md:w-fit w-full items-center disabled:bg-purple-800 disabled:cursor-not-allowed text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-base md:text-sm lg:text-sm px-4 md:py-2.5 lg:py-2.5 py-4 text-center focus:outline-none">
-                    Generate
-                    <svg class="lg:w-4 md:w-4 w-7 lg:h-4 md:h-4 ms-1.5 fill-white -me-0.5" fill="#000000" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M 26.6875 12.6602 C 26.9687 12.6602 27.1094 12.4961 27.1797 12.2383 C 27.9062 8.3242 27.8594 8.2305 31.9375 7.4570 C 32.2187 7.4102 32.3828 7.2461 32.3828 6.9648 C 32.3828 6.6836 32.2187 6.5195 31.9375 6.4726 C 27.8828 5.6524 28.0000 5.5586 27.1797 1.6914 C 27.1094 1.4336 26.9687 1.2695 26.6875 1.2695 C 26.4062 1.2695 26.2656 1.4336 26.1953 1.6914 C 25.3750 5.5586 25.5156 5.6524 21.4375 6.4726 C 21.1797 6.5195 20.9922 6.6836 20.9922 6.9648 C 20.9922 7.2461 21.1797 7.4102 21.4375 7.4570 C 25.5156 8.2774 25.4687 8.3242 26.1953 12.2383 C 26.2656 12.4961 26.4062 12.6602 26.6875 12.6602 Z M 15.3438 28.7852 C 15.7891 28.7852 16.0938 28.5039 16.1406 28.0821 C 16.9844 21.8242 17.1953 21.8242 23.6641 20.5821 C 24.0860 20.5117 24.3906 20.2305 24.3906 19.7852 C 24.3906 19.3633 24.0860 19.0586 23.6641 18.9883 C 17.1953 18.0977 16.9609 17.8867 16.1406 11.5117 C 16.0938 11.0899 15.7891 10.7852 15.3438 10.7852 C 14.9219 10.7852 14.6172 11.0899 14.5703 11.5352 C 13.7969 17.8164 13.4687 17.7930 7.0469 18.9883 C 6.6250 19.0821 6.3203 19.3633 6.3203 19.7852 C 6.3203 20.2539 6.6250 20.5117 7.1406 20.5821 C 13.5156 21.6133 13.7969 21.7774 14.5703 28.0352 C 14.6172 28.5039 14.9219 28.7852 15.3438 28.7852 Z M 31.2344 54.7305 C 31.8438 54.7305 32.2891 54.2852 32.4062 53.6524 C 34.0703 40.8086 35.8750 38.8633 48.5781 37.4570 C 49.2344 37.3867 49.6797 36.8945 49.6797 36.2852 C 49.6797 35.6758 49.2344 35.2070 48.5781 35.1133 C 35.8750 33.7070 34.0703 31.7617 32.4062 18.9180 C 32.2891 18.2852 31.8438 17.8633 31.2344 17.8633 C 30.6250 17.8633 30.1797 18.2852 30.0860 18.9180 C 28.4219 31.7617 26.5938 33.7070 13.9140 35.1133 C 13.2344 35.2070 12.7891 35.6758 12.7891 36.2852 C 12.7891 36.8945 13.2344 37.3867 13.9140 37.4570 C 26.5703 39.1211 28.3281 40.8321 30.0860 53.6524 C 30.1797 54.2852 30.6250 54.7305 31.2344 54.7305 Z" />
-                    </svg>
-                </button>
-            </div>
-        </form> --}}
-        <!-- GENERATING -->
-        {{-- <div class="w-full max-w-screen-sm flex flex-col items-center justify-center px-[15px]">
-            <dotlottie-player
-                src="{{ asset('lottie/Ai-powered marketing tools abstract.lottie') }}"
-                autoplay
-                loop
-                class="md:w-[350px] lg:w-[350px] w-[300px] md:h-[350px] lg:h-[350px]"></dotlottie-player>
-
-            <div class="flex justify-between mb-1">
-                <span class="text-sm font-medium text-body">Generating your quiz...hang tight!</span>
-                <span class="text-sm font-medium text-body">45%</span>
-            </div>
-            <div class="w-full bg-neutral-quaternary rounded-full h-3">
-                <div class="bg-purple-600 h-3 rounded-full" style="width: 45%"></div>
-            </div>
-        </div> --}}
+            </button>
+        </form>
+        
     </section>
     <!-- HERO -->
     <section class="bg-neutral-primary">
@@ -1601,6 +1463,25 @@ Whether it’s school subjects, professional skills, hobbies, or general knowled
         }
 
         counter1.textContent = textarea1.value.length;
+    });
+</script>
+<script>
+    const fileInput = document.getElementById('dropzone-file-2');
+    const submitBtn = document.getElementById('submit-btn');
+    const fileNameDisplay = document.getElementById('file-name');
+
+    fileInput.addEventListener('change', function(e) {
+        if (e.target.files.length > 0) {
+            const fileName = e.target.files[0].name;
+            const fileSize = (e.target.files[0].size / 1024 / 1024).toFixed(2);
+            
+            fileNameDisplay.textContent = `Selected: ${fileName} (${fileSize} MB)`;
+            fileNameDisplay.classList.remove('hidden');
+            submitBtn.disabled = false;
+        } else {
+            fileNameDisplay.classList.add('hidden');
+            submitBtn.disabled = true;
+        }
     });
 </script>
 
