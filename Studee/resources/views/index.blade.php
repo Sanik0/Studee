@@ -182,8 +182,8 @@
         <!-- UPLOAD FORM -->
         <form action="" class="w-full max-w-screen-sm gap-[20px] justify-center items-end flex flex-col">
             <!-- FILE UPLOAD -->
-            <div  id="byFile" role="tabpanel" aria-labelledby="by-file-tab" class="flex items-center hidden justify-center w-full">
-                <div class="flex flex-col items-center justify-center w-full h-64 bg-neutral-secondary-medium border border-dashed border-purple-600 rounded-base">
+            <div  id="byFile" role="tabpanel" aria-labelledby="by-file-tab" class="flex items-center h-fit hidden justify-center w-full">
+                <div class="flex flex-col items-center justify-center w-full min-h-64 bg-neutral-secondary-medium border border-dashed border-purple-600 rounded-base">
                     <div class="flex flex-col items-center justify-center text-body pt-5 pb-6">
                         <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v9m-5 0H5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-2M8 9l4-5 4 5m1 8h.01" />
@@ -203,11 +203,8 @@
             <!-- PROMPT -->
              <div class="w-full hidden"  id="prompt" role="tabpanel" aria-labelledby="prompt-tab">
                 <textarea id="prompt" rows="4" class="bg-neutral-secondary-medium border border-purple-400 text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 resize-none h-[250px] block w-full p-3.5 shadow-xs placeholder:text-body" placeholder="Generate a computer science quiz focusing on fundamentals such as algorithms, data structures, programming concepts, and basic computer systems. "></textarea>
-                <p class="mt-2 text-sm text-gray-500">
-                    <span id="count">0</span> / 300
-                </p>
              </div>
-            <button disabled type="button" class="inline-flex w-fit items-center disabled:bg-purple-800 disabled:cursor-not-allowed text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+            <button disabled id="nextStepBtn" type="button" class="inline-flex w-fit items-center disabled:bg-purple-800 disabled:cursor-not-allowed text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                 Next Step
                 <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
@@ -1566,6 +1563,114 @@ Whether it’s school subjects, professional skills, hobbies, or general knowled
 
         counter1.textContent = textarea1.value.length;
     });
+</script>
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('dropzone-file-2');
+    const nextButton = document.getElementById('nextStepBtn');
+    const maxFileSize = 10 * 1024 * 1024; // 10MB in bytes
+    
+    if (!nextButton) {
+        console.error('Next Step button not found! Make sure the button has id="nextStepBtn"');
+        return;
+    }
+    
+    // Allowed file types
+    const allowedExtensions = ['pdf', 'docx', 'ppt', 'pptx', 'txt'];
+    const allowedMimeTypes = [
+        'application/pdf',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'application/vnd.ms-powerpoint',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        'text/plain'
+    ];
+    
+    // Ensure button starts disabled
+    nextButton.disabled = true;
+    
+    // Create filename display element
+    const filenameDisplay = document.createElement('p');
+    filenameDisplay.className = 'text-sm mt-2 p-3 text-center font-medium';
+    filenameDisplay.style.display = 'none';
+    
+    // Insert filename display after the browse button
+    const uploadContainer = document.querySelector('#byFile .flex.flex-col.items-center');
+    uploadContainer.appendChild(filenameDisplay);
+    
+    // Create error message element
+    const errorMessage = document.createElement('p');
+    errorMessage.className = 'text-sm mt-2 p-3 text-center font-medium text-red-600';
+    errorMessage.style.display = 'none';
+    uploadContainer.appendChild(errorMessage);
+    
+    fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        
+        // Reset messages and button
+        filenameDisplay.style.display = 'none';
+        errorMessage.style.display = 'none';
+        nextButton.disabled = true;
+        
+        if (file) {
+            const fileName = file.name;
+            const fileExtension = fileName.split('.').pop().toLowerCase();
+            const fileSize = file.size;
+            const fileSizeMB = (fileSize / (1024 * 1024)).toFixed(2);
+            
+            let hasError = false;
+            let errorMessages = [];
+            
+            // Check file type
+            if (!allowedExtensions.includes(fileExtension) && !allowedMimeTypes.includes(file.type)) {
+                hasError = true;
+                errorMessages.push('Invalid file type. Only PDF, DOCX, PPT, PPTX, and TXT files are allowed');
+            }
+            
+            // Check file size
+            if (fileSize > maxFileSize) {
+                hasError = true;
+                errorMessages.push(`File size (${fileSizeMB}MB) exceeds the 10MB limit`);
+            }
+            
+            if (hasError) {
+                // Display filename in red
+                filenameDisplay.textContent = `Selected: ${fileName} (${fileSizeMB}MB)`;
+                filenameDisplay.className = 'text-sm mt-2 p-3 text-center font-medium text-red-600';
+                filenameDisplay.style.display = 'block';
+                
+                // Display error message
+                errorMessage.textContent = errorMessages.join('. ');
+                errorMessage.style.display = 'block';
+                
+                nextButton.disabled = true;
+            } else {
+                // File is valid
+                filenameDisplay.textContent = `Selected: ${fileName} (${fileSizeMB}MB)`;
+                filenameDisplay.className = 'text-sm mt-2 text-center font-medium text-purple-600';
+                filenameDisplay.style.display = 'block';
+                
+                errorMessage.style.display = 'none';
+                nextButton.disabled = false;
+            }
+        } else {
+            // No file selected
+            nextButton.disabled = true;
+        }
+    });
+    
+    // Optional: Handle textarea for prompt tab
+    const promptTextarea = document.querySelector('#prompt textarea');
+    if (promptTextarea) {
+        promptTextarea.addEventListener('input', function() {
+            // Enable button if textarea has content
+            if (this.value.trim().length > 0) {
+                nextButton.disabled = false;
+            } else {
+                nextButton.disabled = true;
+            }
+        });
+    }
+});
 </script>
 
 </html>
