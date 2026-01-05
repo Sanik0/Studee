@@ -1485,5 +1485,49 @@ Whether it’s school subjects, professional skills, hobbies, or general knowled
         }
     });
 </script>
+<script>
+// File upload validation script
+const MAX_FILE_SIZE_MB = 10;
+const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+
+document.getElementById('dropzone-file-2').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const fileNameDisplay = document.getElementById('file-name');
+    const submitBtn = document.getElementById('submit-btn');
+    
+    if (file) {
+        // Display the file name
+        fileNameDisplay.textContent = file.name;
+        fileNameDisplay.classList.remove('hidden');
+        
+        // Check if file size exceeds 10MB
+        if (file.size > MAX_FILE_SIZE_BYTES) {
+            const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+            
+            // Make file name red
+            fileNameDisplay.classList.remove('text-purple-600');
+            fileNameDisplay.classList.add('text-red-600');
+            fileNameDisplay.textContent = `${file.name} (${fileSizeMB}MB - Exceeds 10MB limit)`;
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+        } else {
+            const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+            
+            // Make file name normal color (purple)
+            fileNameDisplay.classList.remove('text-red-600');
+            fileNameDisplay.classList.add('text-purple-600');
+            fileNameDisplay.textContent = `${file.name} (${fileSizeMB}MB)`;
+            
+            // Enable submit button
+            submitBtn.disabled = false;
+        }
+    } else {
+        // No file selected, hide name and disable button
+        fileNameDisplay.classList.add('hidden');
+        submitBtn.disabled = true;
+    }
+});
+</script>
 
 </html>

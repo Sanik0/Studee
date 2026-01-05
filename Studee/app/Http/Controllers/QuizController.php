@@ -17,10 +17,24 @@ class QuizController extends Controller
     {
         // Validate the file
         $request->validate([
-            'file' => 'required|file|mimes:pdf,docx,doc|max:10240', // 10MB max
+            'file' => 'required|file|mimes:pdf,docx,doc|max:10240', // 10MB max (10240 KB)
+        ], [
+            'file.required' => 'Please upload a file.',
+            'file.file' => 'The uploaded item must be a valid file.',
+            'file.mimes' => 'Only PDF, DOCX, and DOC files are allowed.',
+            'file.max' => 'The file size must not exceed 10MB.',
         ]);
 
         $file = $request->file('file');
+        
+        // Additional server-side check for file size
+        $fileSizeInMB = $file->getSize() / 1024 / 1024; // Convert bytes to MB
+        if ($fileSizeInMB > 10) {
+            return back()
+                ->withInput()
+                ->with('error', 'The uploaded file is too large (' . number_format($fileSizeInMB, 2) . 'MB). Maximum file size is 10MB.');
+        }
+
         $extension = $file->getClientOriginalExtension();
         $extractedText = '';
 
