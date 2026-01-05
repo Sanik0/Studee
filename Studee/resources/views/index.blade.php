@@ -151,6 +151,7 @@
             </div>
         </div>
     </section>
+    {{ session()->forget('error') }}
     @endif
     <!-- CALL TO ACTION -->
     <section class="relative overflow-hidden mt-[65px] ">
