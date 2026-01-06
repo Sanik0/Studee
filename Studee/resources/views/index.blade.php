@@ -125,8 +125,9 @@
         </div>
     </nav>
     <!-- MODAL -->
-    {{-- <section>
-        <div id="popup-modal" tabindex="-1" class=" overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] h-full max-h-full">
+    @if ($errors->any())
+    <section>
+        <div id="popup-modal" tabindex="-1" class="overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] h-full max-h-full">
             <div class="relative p-4 w-full max-w-md max-h-full">
                 <div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
                     <button type="button" class="absolute top-3 end-2.5 text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center" data-modal-hide="popup-modal">
@@ -139,7 +140,14 @@
                         <svg class="mx-auto mb-4 text-fg-disabled w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
-                        <h3 class="mb-6 text-body">We couldn’t process your file. Please ensure it’s valid and contains readable text that can be extracted.</h3>
+
+                        <!-- Display all errors -->
+                        <div class="mb-6 text-body">
+                            @foreach ($errors->all() as $error)
+                            <p class="mb-2">{{ $error }}</p>
+                            @endforeach
+                        </div>
+
                         <div class="flex items-center space-x-4 justify-center">
                             <button data-modal-hide="popup-modal" type="button" class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Retry</button>
                             <button data-modal-hide="popup-modal" type="button" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
@@ -150,7 +158,8 @@
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
+    @endif
     <!-- CALL TO ACTION -->
     <section class="relative overflow-hidden mt-[65px] ">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-10 z-10 relative">
@@ -166,11 +175,11 @@
             <h1 class="mb-6 text-4xl font-semibold tracking-tighter text-heading md:text-5xl lg:text-6xl">Upload a <span class="font-jersey10"></span>document to start your quiz</h1>
             <p class="mb-8 text-base font-normal text-body md:text-xl">Make learning easier and more enjoyable with Studee Quiz Maker!
                 Studee uses AI to help you turn your notes or documents into interactive quizzes in just a few clicks.</p>
-            <div id="default-tab"  data-tabs-active-classes="text-purple-800 hover:text-purple bg-white" data-tabs-toggle="#default-tab-content" role="tablist" class="w-auto inline-flex items-center p-1 pe-2 mb-4 font-medium text-sm text-purple-800 rounded-full bg-purple-200 border border-purple-200" role="alert">
-                <button  id="by-file-tab" data-tabs-target="#byFile" type="button" role="tab" aria-controls="byfile" aria-selected="false" class="text-purple-600 py-0.5 px-2 rounded-full">
+            <div id="default-tab" data-tabs-active-classes="text-purple-800 hover:text-purple bg-white" data-tabs-toggle="#default-tab-content" role="tablist" class="w-auto inline-flex items-center p-1 pe-2 mb-4 font-medium text-sm text-purple-800 rounded-full bg-purple-200 border border-purple-200" role="alert">
+                <button id="by-file-tab" data-tabs-target="#byFile" type="button" role="tab" aria-controls="byfile" aria-selected="false" class="text-purple-600 py-0.5 px-2 rounded-full">
                     By File
                 </button>
-                <button  id="prompt-tab" data-tabs-target="#prompt" type="button" role="tab" aria-controls="prompt" aria-selected="false" class=" text-purple-600 py-0.5 px-2 rounded-full">
+                <button id="prompt-tab" data-tabs-target="#prompt" type="button" role="tab" aria-controls="prompt" aria-selected="false" class=" text-purple-600 py-0.5 px-2 rounded-full">
                     Prompt
                 </button>
             </div>
@@ -180,10 +189,14 @@
     <!-- FORMS -->
     <section class="w-full justify-center align-center flex px-[15px] py-[50px]">
         <!-- SINGLE COMBINED FORM -->
-        <form action="" class="w-full max-w-screen-sm gap-[20px] justify-center items-end flex flex-col">
-            
+        <form action="{{ route('quiz.generate') }}" method="POST" enctype="multipart/form-data" class="w-full max-w-screen-sm gap-[20px] justify-center items-end flex flex-col">
+            @csrf
+
+            <!-- Hidden input for quiz type -->
+            <input type="hidden" name="quiz_type" id="quiz_type" value="multiple-choice">
+
             <!-- STEP 1: UPLOAD SECTION -->
-            <div id="step1" class="w-full flex flex-col gap-[20px]">
+            <div id="step1" class="w-full flex flex-col items-end gap-[20px]">
                 <!-- FILE UPLOAD -->
                 <div id="byFile" role="tabpanel" aria-labelledby="by-file-tab" class="flex items-center h-fit justify-center w-full">
                     <div class="flex flex-col items-center justify-center w-full min-h-64 bg-neutral-secondary-medium border border-dashed border-purple-600 rounded-base">
@@ -200,16 +213,16 @@
                                 Browse file
                             </button>
                         </div>
-                    </div> 
-                    <input id="dropzone-file-2" type="file" class="hidden" />
+                    </div>
+                    <input id="dropzone-file-2" name="file" type="file" class="hidden" />
                 </div>
-                
+
                 <!-- PROMPT -->
                 <div class="w-full" id="prompt" role="tabpanel" aria-labelledby="prompt-tab">
-                    <textarea id="promptText" rows="4" class="bg-neutral-secondary-medium border border-purple-400 text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 resize-none h-[250px] block w-full p-3.5 shadow-xs placeholder:text-body" placeholder="Generate a computer science quiz focusing on fundamentals such as algorithms, data structures, programming concepts, and basic computer systems."></textarea>
+                    <textarea id="promptText" name="prompt" rows="4" class="bg-neutral-secondary-medium border border-purple-400 text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 resize-none h-[250px] block w-full p-3.5 shadow-xs placeholder:text-body" placeholder="Generate a computer science quiz focusing on fundamentals such as algorithms, data structures, programming concepts, and basic computer systems."></textarea>
                 </div>
-                
-                <button type="button" id="nextStepBtn" class="inline-flex w-fit items-center disabled:bg-purple-800 disabled:cursor-not-allowed text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+
+                <button disabled type="button" id="nextStepBtn" class="inline-flex items-center justify-center lg:w-fit md:w-fit w-full items-center disabled:bg-purple-800 disabled:cursor-not-allowed text-white bg-purple-600 hover:bg-purple-700 box-border border border-transparent focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-base md:text-sm lg:text-sm px-4 md:py-2.5 lg:py-2.5 py-4 text-center focus:outline-none">
                     Next Step
                     <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
@@ -218,7 +231,8 @@
             </div>
 
             <!-- STEP 2: CHOOSE QUIZ TYPE (Hidden by default) -->
-            <div id="step2" class="hidden w-full flex flex-col gap-[15px]">
+            <div id="step2" class="hidden w-full flex flex-col gap-[15px]" style="display: none;">
+                <!-- Rest of step 2 stays the same -->
                 <h2 class="mb-6 text-2xl w-full flex items-start font-bold tracking-tighter text-heading md:text-3xl lg:text-4xl">What type of quiz do you want</h2>
                 <div class="flex flex-col w-full gap-[20px]">
                     <ul class="select-none w-full gap-4 flex flex-col">
@@ -1330,7 +1344,7 @@
                     <h5 class="mt-6x text-purple-600 mb-2 text-2xl font-semibold tracking-tight text-heading">
                         AI-powered quiz generation
                     </h5>
-                   <p class="mb-6 text-body">
+                    <p class="mb-6 text-body">
                         Simply upload a file or describe what you want to study, and Studee’s AI instantly creates accurate, engaging quizzes tailored to your content—saving you time while helping you focus on learning.
                     </p>
                 </div>
@@ -1373,7 +1387,7 @@
                 <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
                     <div class="py-5 border-b border-default text-body">
                         <p class="mb-2">Studee is an AI-powered learning platform that helps you turn files, notes, or simple prompts into interactive quizzes.
-Instead of manually creating questions, you can upload your study materials or describe a topic, and Studee automatically generates quizzes to help you review, practice, and learn more effectively—anytime, on any device.</p>
+                            Instead of manually creating questions, you can upload your study materials or describe a topic, and Studee automatically generates quizzes to help you review, practice, and learn more effectively—anytime, on any device.</p>
                     </div>
                 </div>
                 <h2 id="accordion-flush-heading-2">
@@ -1387,7 +1401,7 @@ Instead of manually creating questions, you can upload your study materials or d
                 <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
                     <div class="py-5 border-b border-default text-body">
                         <p class="mb-2">No, you don’t need an account to create a quiz.
-Studee lets you generate quizzes instantly without signing up or logging in, so you can start studying right away with no barriers or setup required.</p>
+                            Studee lets you generate quizzes instantly without signing up or logging in, so you can start studying right away with no barriers or setup required.</p>
                     </div>
                 </div>
                 <h2 id="accordion-flush-heading-3">
@@ -1401,7 +1415,7 @@ Studee lets you generate quizzes instantly without signing up or logging in, so 
                 <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
                     <div class="py-5 text-body border-b border-default">
                         <p class="mb-2">TYou can create quizzes using a variety of common file types.
-Studee supports files like PDF, DOCX, PPT, and text files, allowing you to upload your study materials and instantly turn them into quizzes using AI. You can also create quizzes by simply entering a topic or prompt—no file required.</p>
+                            Studee supports files like PDF, DOCX, PPT, and text files, allowing you to upload your study materials and instantly turn them into quizzes using AI. You can also create quizzes by simply entering a topic or prompt—no file required.</p>
                     </div>
                 </div>
                 <h2 id="accordion-flush-heading-4">
@@ -1415,7 +1429,7 @@ Studee supports files like PDF, DOCX, PPT, and text files, allowing you to uploa
                 <div id="accordion-flush-body-4" class="hidden" aria-labelledby="accordion-flush-heading-4">
                     <div class="py-5 text-body border-b border-default">
                         <p class="mb-2">No, there are no limits on how many quizzes you can create.
-You can generate as many quizzes as you want using Studee, giving you the freedom to practice, review, and learn without restrictions.</p>
+                            You can generate as many quizzes as you want using Studee, giving you the freedom to practice, review, and learn without restrictions.</p>
                     </div>
                 </div>
                 <h2 id="accordion-flush-heading-5">
@@ -1429,7 +1443,7 @@ You can generate as many quizzes as you want using Studee, giving you the freedo
                 <div id="accordion-flush-body-5" class="hidden" aria-labelledby="accordion-flush-heading-5">
                     <div class="py-5 text-body border-b border-default">
                         <p class="mb-2">You can create quizzes on any topic using a prompt.
-Whether it’s school subjects, professional skills, hobbies, or general knowledge, Studee’s AI can generate quizzes from virtually any topic you want to study.</p>
+                            Whether it’s school subjects, professional skills, hobbies, or general knowledge, Studee’s AI can generate quizzes from virtually any topic you want to study.</p>
                     </div>
                 </div>
             </div>
@@ -1542,154 +1556,141 @@ Whether it’s school subjects, professional skills, hobbies, or general knowled
 <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 <script>
-    const textarea1 = document.getElementById('prompt');
-    const counter1 = document.getElementById('count');
-    const maxChars1 = 300;
+    document.addEventListener('DOMContentLoaded', function() {
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const nextStepBtn = document.getElementById('nextStepBtn');
+        const goBackBtn = document.getElementById('goBackBtn');
+        const fileInput = document.getElementById('dropzone-file-2');
+        const promptText = document.getElementById('promptText');
+        const quizTypeInput = document.getElementById('quiz_type');
+        const radioButtons = document.querySelectorAll('input[name="technologies"]');
 
-    textarea1.addEventListener('input', () => {
-        if (textarea1.value.length > maxChars1) {
-            textarea1.value = textarea1.value.slice(0, maxChars1);
-        }
+        const maxFileSize = 10 * 1024 * 1024; // 10MB in bytes
 
-        counter1.textContent = textarea1.value.length;
-    });
-</script>
-<script>
-   document.addEventListener('DOMContentLoaded', function() {
-    const fileInput = document.getElementById('dropzone-file-2');
-    const nextButton = document.getElementById('nextStepBtn');
-    const maxFileSize = 10 * 1024 * 1024; // 10MB in bytes
-    
-    if (!nextButton) {
-        console.error('Next Step button not found! Make sure the button has id="nextStepBtn"');
-        return;
-    }
-    
-    // Allowed file types
-    const allowedExtensions = ['pdf', 'docx', 'ppt', 'pptx', 'txt'];
-    const allowedMimeTypes = [
-        'application/pdf',
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        'application/vnd.ms-powerpoint',
-        'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-        'text/plain'
-    ];
-    
-    // Ensure button starts disabled
-    nextButton.disabled = true;
-    
-    // Create filename display element
-    const filenameDisplay = document.createElement('p');
-    filenameDisplay.className = 'text-sm mt-2 p-3 text-center font-medium';
-    filenameDisplay.style.display = 'none';
-    
-    // Insert filename display after the browse button
-    const uploadContainer = document.querySelector('#byFile .flex.flex-col.items-center');
-    uploadContainer.appendChild(filenameDisplay);
-    
-    // Create error message element
-    const errorMessage = document.createElement('p');
-    errorMessage.className = 'text-sm mt-2 p-3 text-center font-medium text-red-600';
-    errorMessage.style.display = 'none';
-    uploadContainer.appendChild(errorMessage);
-    
-    fileInput.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        
-        // Reset messages and button
+        // Allowed file types
+        const allowedExtensions = ['pdf', 'docx', 'ppt', 'pptx', 'txt'];
+        const allowedMimeTypes = [
+            'application/pdf',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.ms-powerpoint',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'text/plain'
+        ];
+
+        // Update quiz type when radio button changes
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', function() {
+                quizTypeInput.value = this.value;
+                console.log('Quiz type changed to:', this.value); // Debug log
+            });
+        });
+
+        // Create filename display element
+        const filenameDisplay = document.createElement('p');
+        filenameDisplay.className = 'text-sm mt-2 p-3 text-center font-medium';
         filenameDisplay.style.display = 'none';
+
+        // Insert filename display after the browse button
+        const uploadContainer = document.querySelector('#byFile .flex.flex-col.items-center');
+        uploadContainer.appendChild(filenameDisplay);
+
+        // Create error message element
+        const errorMessage = document.createElement('p');
+        errorMessage.className = 'text-sm mt-2 p-3 text-center font-medium text-red-600';
         errorMessage.style.display = 'none';
-        nextButton.disabled = true;
-        
-        if (file) {
+        uploadContainer.appendChild(errorMessage);
+
+        // File validation function
+        function validateFile(file) {
+            if (!file) {
+                nextStepBtn.disabled = true;
+                return;
+            }
+
             const fileName = file.name;
             const fileExtension = fileName.split('.').pop().toLowerCase();
             const fileSize = file.size;
             const fileSizeMB = (fileSize / (1024 * 1024)).toFixed(2);
-            
+
             let hasError = false;
             let errorMessages = [];
-            
+
             // Check file type
             if (!allowedExtensions.includes(fileExtension) && !allowedMimeTypes.includes(file.type)) {
                 hasError = true;
                 errorMessages.push('Invalid file type. Only PDF, DOCX, PPT, PPTX, and TXT files are allowed');
             }
-            
+
             // Check file size
             if (fileSize > maxFileSize) {
                 hasError = true;
                 errorMessages.push(`File size (${fileSizeMB}MB) exceeds the 10MB limit`);
             }
-            
+
             if (hasError) {
-                // Display filename in red
                 filenameDisplay.textContent = `Selected: ${fileName} (${fileSizeMB}MB)`;
                 filenameDisplay.className = 'text-sm mt-2 p-3 text-center font-medium text-red-600';
                 filenameDisplay.style.display = 'block';
-                
-                // Display error message
                 errorMessage.textContent = errorMessages.join('. ');
                 errorMessage.style.display = 'block';
-                
-                nextButton.disabled = true;
+                nextStepBtn.disabled = true;
             } else {
-                // File is valid
                 filenameDisplay.textContent = `Selected: ${fileName} (${fileSizeMB}MB)`;
                 filenameDisplay.className = 'text-sm mt-2 text-center font-medium text-purple-600';
                 filenameDisplay.style.display = 'block';
-                
                 errorMessage.style.display = 'none';
-                nextButton.disabled = false;
+                nextStepBtn.disabled = false;
             }
-        } else {
-            // No file selected
-            nextButton.disabled = true;
         }
-    });
-    
-    // Optional: Handle textarea for prompt tab
-    const promptTextarea = document.querySelector('#prompt textarea');
-    if (promptTextarea) {
-        promptTextarea.addEventListener('input', function() {
-            // Enable button if textarea has content
-            if (this.value.trim().length > 0) {
-                nextButton.disabled = false;
+
+        // Check inputs function
+        function checkInputs() {
+            const hasFile = fileInput.files.length > 0;
+            const hasPrompt = promptText.value.trim().length > 0;
+
+            if (hasFile) {
+                validateFile(fileInput.files[0]);
+            } else if (hasPrompt) {
+                filenameDisplay.style.display = 'none';
+                errorMessage.style.display = 'none';
+                nextStepBtn.disabled = false;
             } else {
-                nextButton.disabled = true;
+                filenameDisplay.style.display = 'none';
+                errorMessage.style.display = 'none';
+                nextStepBtn.disabled = true;
             }
+        }
+
+        // Event listeners
+        fileInput.addEventListener('change', checkInputs);
+        promptText.addEventListener('input', checkInputs);
+
+        // Next Step button - show step 2, hide step 1
+        nextStepBtn.addEventListener('click', function() {
+            step1.classList.add('hidden');
+            step2.classList.remove('hidden');
+            step2.style.display = 'flex';
         });
-    }
-});
-</script>
-<script>
-    const step1 = document.getElementById('step1');
-    const step2 = document.getElementById('step2');
-    const nextStepBtn = document.getElementById('nextStepBtn');
-    const goBackBtn = document.getElementById('goBackBtn');
-    const fileInput = document.getElementById('dropzone-file-2');
-    const promptText = document.getElementById('promptText');
 
-    // Enable/disable Next Step button based on file or prompt
-    function checkInputs() {
-        const hasFile = fileInput.files.length > 0;
-        const hasPrompt = promptText.value.trim().length > 0;
-        nextStepBtn.disabled = !(hasFile || hasPrompt);
-    }
+        // Go Back button - show step 1, hide step 2
+        goBackBtn.addEventListener('click', function() {
+            step2.classList.add('hidden');
+            step2.style.display = 'none';
+            step1.classList.remove('hidden');
+        });
 
-    fileInput.addEventListener('change', checkInputs);
-    promptText.addEventListener('input', checkInputs);
+        // Close modal functionality
+        const modalButtons = document.querySelectorAll('[data-modal-hide="popup-modal"]');
+        const modal = document.getElementById('popup-modal');
 
-    // Next Step button - show step 2, hide step 1
-    nextStepBtn.addEventListener('click', function() {
-        step1.classList.add('hidden');
-        step2.classList.remove('hidden');
-    });
-
-    // Go Back button - show step 1, hide step 2
-    goBackBtn.addEventListener('click', function() {
-        step2.classList.add('hidden');
-        step1.classList.remove('hidden');
+        if (modal) {
+            modalButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    modal.remove();
+                });
+            });
+        }
     });
 </script>
 
