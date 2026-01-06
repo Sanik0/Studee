@@ -85,6 +85,7 @@ class QuizController extends Controller
 
             // Store quiz in session for display
             session(['current_quiz' => $quiz, 'quiz_type' => $quizType]);
+            session()->forget(['quiz_results', 'correct_count']); // Clear old results
 
             return redirect()->route('quiz.show');
         } catch (\Exception $e) {
@@ -253,7 +254,7 @@ class QuizController extends Controller
         return $text;
     }
 
-    public function submit(Request $request)
+   public function submit(Request $request)
 {
     $quiz = session('current_quiz');
     $quizType = session('quiz_type');
@@ -281,10 +282,8 @@ class QuizController extends Controller
         ];
     }
     
-    return view('quiz-results', [
-        'results' => $results,
-        'correctCount' => $correctCount,
-        'totalQuestions' => count($quiz)
-    ]);
+    session(['quiz_results' => $results, 'correct_count' => $correctCount]);
+    
+    return redirect()->route('quiz.show');
 }
 }
