@@ -96,107 +96,99 @@ class QuizController extends Controller
 
     private function generateQuizWithGemini($text, $quizType)
     {
-        $apiKey = env('GEMINI_API_KEY');
+        $apiKey = env('OPENROUTER_API_KEY', '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');
 
         if (!$apiKey) {
-            throw new \Exception('Gemini API key not configured');
+            throw new \Exception('OpenRouter API key not configured');
         }
 
-        $prompts = [
-            'multiple-choice' => "Based on the following content, generate exactly 20 multiple-choice questions. Each question should have 4 options and indicate the correct answer. Format your response as a JSON array with this structure:
-[
-  {
-    \"question\": \"Question text here\",
-    \"options\": [\"Option A\", \"Option B\", \"Option C\", \"Option D\"],
-    \"correct_answer\": \"Option A\"
-  }
-]
+       $prompts = [
+                'multiple-choice' => "Based on the following content, generate exactly 1 multiple-choice question in a JSON array with 4 options.
 
-Content: {$text}
+            [
+            {
+                \"question\": \"Question text\",
+                \"options\": [\"Option A\", \"Option B\", \"Option C\", \"Option D\"],
+                \"correct_answer\": \"Option A\"
+            }
+            ]
 
-Respond ONLY with valid JSON, no additional text or formatting.",
+            Content: {$text}
 
-            'true-false' => "Based on the following content, generate exactly 20 true or false questions. Format your response as a JSON array with this structure:
-[
-  {
-    \"question\": \"Statement here\",
-    \"correct_answer\": \"True\"
-  }
-]
+            Return ONLY the JSON array.",
 
-Content: {$text}
+                'true-false' => "Based on the following content, generate exactly 1 true/false question in a JSON array.
 
-Respond ONLY with valid JSON, no additional text or formatting.",
+            [{\"question\": \"Statement\", \"correct_answer\": \"True\"}]
 
-            'identification' => "Based on the following content, generate exactly 20 identification questions where the answer is a single term, name, or short phrase. Format your response as a JSON array with this structure:
-[
-  {
-    \"question\": \"Question text here\",
-    \"correct_answer\": \"The answer\"
-  }
-]
+            Content: {$text}
 
-Content: {$text}
+            Return ONLY the JSON array.",
 
-Respond ONLY with valid JSON, no additional text or formatting.",
+                'identification' => "Based on the following content, generate exactly 1 identification question in a JSON array.
 
-            'fill-blank' => "Based on the following content, generate exactly 20 fill-in-the-blank questions. Use ___ to indicate where the blank should be. Format your response as a JSON array with this structure:
-[
-  {
-    \"question\": \"Statement with ___ indicating the blank\",
-    \"correct_answer\": \"The word/phrase that fills the blank\"
-  }
-]
+            [{\"question\": \"Question\", \"correct_answer\": \"Answer\"}]
 
-Content: {$text}
+            Content: {$text}
 
-Respond ONLY with valid JSON, no additional text or formatting."
+            Return ONLY the JSON array.",
+
+                'fill-blank' => "Based on the following content, generate exactly 1 fill-in-the-blank question in a JSON array. Use ___ for blank.
+
+            [{\"question\": \"Statement with ___\", \"correct_answer\": \"Answer\"}]
+
+            Content: {$text}
+
+            Return ONLY the JSON array."
         ];
 
         $prompt = $prompts[$quizType] ?? $prompts['multiple-choice'];
 
-        // Use the v1 API with gemini-1.5-flash (fastest and most reliable)
-        // Replace this line in generateQuizWithGemini:
-        $response = Http::timeout(60)->withHeaders([
+        $response = Http::timeout(120)->withHeaders([
             'Content-Type' => 'application/json',
-        ])->post("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={$apiKey}", [
-            'contents' => [
+            'Authorization' => 'Bearer ' . $apiKey,
+            'HTTP-Referer' => url('/'),
+            'X-Title' => 'Studee Quiz Maker'
+        ])->post('https://openrouter.ai/api/v1/chat/completions', [
+            'model' => 'nousresearch/hermes-3-llama-3.1-405b:free',
+            'max_tokens' => 2000,
+            'messages' => [
                 [
-                    'parts' => [
-                        ['text' => $prompt]
-                    ]
+                    'role' => 'system',
+                    'content' => 'You are a helpful assistant that ONLY outputs valid JSON. Never add explanations or extra text.'
+                ],
+                [
+                    'role' => 'user',
+                    'content' => $prompt
                 ]
-            ],
-            'generationConfig' => [
-                'temperature' => 0.7,
-                'topK' => 40,
-                'topP' => 0.95,
-                'maxOutputTokens' => 8192,
             ]
         ]);
 
         if (!$response->successful()) {
-            throw new \Exception('Gemini API request failed: ' . $response->body());
+            throw new \Exception('OpenRouter API request failed: ' . $response->body());
         }
 
         $responseData = $response->json();
-
-        // Extract text from Gemini response
-        $responseText = $responseData['candidates'][0]['content']['parts'][0]['text'] ?? '';
+        $responseText = $responseData['choices'][0]['message']['content'] ?? '';
 
         if (empty($responseText)) {
-            throw new \Exception('Empty response from Gemini API');
+            throw new \Exception('Empty response from OpenRouter API');
         }
 
-        // Clean response - remove markdown code blocks if present
+        // Clean markdown formatting
         $responseText = preg_replace('/```json\s*|\s*```/', '', $responseText);
+        $responseText = preg_replace('/```\s*|\s*```/', '', $responseText);
         $responseText = trim($responseText);
+        
+        // Find the first complete JSON array
+        if (preg_match('/\[[\s\S]*?\{[\s\S]*?\}[\s\S]*?\]/', $responseText, $matches)) {
+            $responseText = $matches[0];
+        }
 
-        // Parse JSON response
         $quiz = json_decode($responseText, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new \Exception('Invalid JSON response from Gemini API: ' . json_last_error_msg());
+            throw new \Exception('Invalid JSON response: ' . json_last_error_msg() . ' | Response: ' . substr($responseText, 0, 500));
         }
 
         return $quiz;
@@ -260,4 +252,39 @@ Respond ONLY with valid JSON, no additional text or formatting."
 
         return $text;
     }
+
+    public function submit(Request $request)
+{
+    $quiz = session('current_quiz');
+    $quizType = session('quiz_type');
+    
+    if (!$quiz) {
+        return redirect()->route('home')->withErrors(['general' => 'No quiz found.']);
+    }
+    
+    $results = [];
+    $correctCount = 0;
+    
+    foreach ($quiz as $index => $question) {
+        $userAnswer = $request->input("question_{$index}");
+        $correctAnswer = $question['correct_answer'];
+        $isCorrect = strtolower(trim($userAnswer)) === strtolower(trim($correctAnswer));
+        
+        if ($isCorrect) {
+            $correctCount++;
+        }
+        
+        $results[] = [
+            'question' => $question,
+            'user_answer' => $userAnswer,
+            'is_correct' => $isCorrect
+        ];
+    }
+    
+    return view('quiz-results', [
+        'results' => $results,
+        'correctCount' => $correctCount,
+        'totalQuestions' => count($quiz)
+    ]);
+}
 }

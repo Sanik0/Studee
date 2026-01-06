@@ -132,12 +132,12 @@
                 </div>
             </div>
         </section> --}}
-    <!-- COMPLETION -->
-    {{-- <section>
-            <div id="popup-modal" tabindex="-1" class=" overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] h-full max-h-full">
+    @if(session('quiz_results'))
+        <section>
+            <div id="popup-modal" tabindex="-1" class="overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] h-full max-h-full">
                 <div class="relative p-4 w-full max-w-md max-h-full">
                     <div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
-                        <button type="button" class="absolute top-3 end-2.5 text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center" data-modal-hide="popup-modal">
+                        <button type="button" class="absolute top-3 end-2.5 text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center" onclick="window.location.href='{{ route('home') }}'">
                             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
                             </svg>
@@ -150,35 +150,42 @@
                             </svg>
                             <div class="w-full flex flex-col items-center justify-center gap-3 text-center">
                                 <h3 class="text-2xl font-semibold">Quiz Completed!</h3>
-                                <h3 class="mb-6 text-body">You scored 30 out of 30, that's <span>100%</span>! Keep it up.</h3>
+                                @php
+                                    $correctCount = session('correct_count');
+                                    $totalQuestions = count(session('quiz_results'));
+                                    $percentage = round(($correctCount / $totalQuestions) * 100);
+                                @endphp
+                                <h3 class="mb-6 text-body">You scored {{ $correctCount }} out of {{ $totalQuestions }}, that's <span class="font-bold">{{ $percentage }}%</span>! {{ $percentage >= 70 ? 'Keep it up.' : 'Keep practicing!' }}</h3>
                             </div>
                             <div class="grid w-full gap-3 pb-6 md:grid-cols-1">
-                                <div for="hosting-small" class="inline-flex items-center justify-between w-full p-5 text-red-800 bg-red-50 border-1 border-red-200 rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 peer-checked:text-purple-900">
+                                <div class="inline-flex items-center justify-between w-full p-5 text-red-800 bg-red-50 border-1 border-red-200 rounded-base">
                                     <div class="block">
-                                        <div class="w-full">Answered 0 Incorrectly</div>
+                                        <div class="w-full">Answered {{ $totalQuestions - $correctCount }} Incorrectly</div>
                                     </div>
                                 </div>
-                                <div for="hosting-small" class="inline-flex items-center justify-between w-full p-5 text-green-800 bg-green-50 border-1 border-green-200 rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 peer-checked:text-purple-900">
+                                <div class="inline-flex items-center justify-between w-full p-5 text-green-800 bg-green-50 border-1 border-green-200 rounded-base">
                                     <div class="block">
-                                        <div class="w-full">Answered 30 Correctly</div>
+                                        <div class="w-full">Answered {{ $correctCount }} Correctly</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="flex items-center space-x-4 justify-end gap-2">
-                                <button data-modal-hide="popup-modal" type="button" class="text-body flex items-center bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                                <a href="{{ route('home') }}" class="text-body flex items-center bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                                     <svg class="h-4 w-4 me-1.5 fill-body" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
                                         <path d="M480-80q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-440h80q0 117 81.5 198.5T480-160q117 0 198.5-81.5T760-440q0-117-81.5-198.5T480-720h-6l62 62-56 58-160-160 160-160 56 58-62 62h6q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-440q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-80Z" />
                                     </svg>
-                                    Retake</button>
-                                <button data-modal-hide="popup-modal" type="button" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                                    Retake
+                                </a>
+                                <a href="{{ route('home') }}" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                                     Exit Quiz
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section> --}}
+        </section>
+    @endif
     <!-- Error Modal -->
     @if ($errors->any())
     <section>
