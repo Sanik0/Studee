@@ -2,7 +2,7 @@
 
 An AI-powered, databaseless quiz generator that transforms your study materials into interactive quizzes in seconds. Upload documents or enter prompts, and let AI create personalized quizzes to enhance your learning experience.
 
-![Studee Banner](path/to/banner-image.png) <!-- Add a screenshot of your app -->
+![Studee Homepage](Studee/public/images/books.png)<!-- Add a screenshot of your app -->
 
 ## ✨ Features
 
