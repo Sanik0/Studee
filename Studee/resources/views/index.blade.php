@@ -218,7 +218,7 @@
                 </div>
 
                 <!-- PROMPT -->
-                <div class="w-full" id="prompt" role="tabpanel" aria-labelledby="prompt-tab">
+                <div class="w-full hidden" id="prompt" role="tabpanel" aria-labelledby="prompt-tab">
                     <textarea id="promptText" name="prompt" rows="4" class="bg-neutral-secondary-medium border border-purple-400 text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 resize-none h-[250px] block w-full p-3.5 shadow-xs placeholder:text-body" placeholder="Generate a computer science quiz focusing on fundamentals such as algorithms, data structures, programming concepts, and basic computer systems."></textarea>
                 </div>
 

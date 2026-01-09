@@ -151,7 +151,7 @@ class QuizController extends Controller
             'HTTP-Referer' => url('/'),
             'X-Title' => 'Studee Quiz Maker'
         ])->post('https://openrouter.ai/api/v1/chat/completions', [
-            'model' => 'nousresearch/hermes-3-llama-3.1-405b:free',
+            'model' => 'minimax/minimax-m2.1',
             'max_tokens' => 2000,
             'messages' => [
                 [
