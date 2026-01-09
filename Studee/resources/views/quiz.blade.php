@@ -46,7 +46,7 @@
                         </ul>
                     </div>
                 </div>
-                <button type="button" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Exit Quiz</button>
+                <a href="{{ route('home') }}" type="button" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Exit Quiz</a>
             </div>
             <div class="items-center justify-between hidden md:flex w-full md:w-auto md:order-1" id="navbar-sticky">
                 <div class="flex items-center justify-center flex-col w-full gap-2">
@@ -175,7 +175,7 @@
         <div id="popup-modal" tabindex="-1" class="overflow-y-auto overflow-x-hidden w-full bg-[rgba(0,0,0,0.5)] flex fixed top-0 right-0 left-0 z-50 justify-center pt-20 w-full md:inset-0 h-[calc(100%-1rem)] h-full max-h-full">
             <div class="relative p-4 w-full max-w-md max-h-full">
                 <div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
-                    <button type="button" class="absolute top-3 end-2.5 text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center" onclick="window.location.href='{{ route('home') }}'">
+                    <button type="button" onclick="this.closest('section').remove()" class="absolute top-3 end-2.5 text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center">
                         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
                         </svg>
@@ -208,7 +208,7 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-4 justify-end gap-2">
-                            <a href="{{ route('home') }}" class="text-body flex items-center bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                            <a href="{{ route('quiz.show') }}?retake=1" class="text-body flex items-center bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                                 <svg class="h-4 w-4 me-1.5 fill-body" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
                                     <path d="M480-80q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-440h80q0 117 81.5 198.5T480-160q117 0 198.5-81.5T760-440q0-117-81.5-198.5T480-720h-6l62 62-56 58-160-160 160-160 56 58-62 62h6q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-440q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-80Z" />
                                 </svg>
@@ -253,16 +253,24 @@
         </div>
     </section>
     @endif
-
     <!-- QUIZ FORM -->
     <section class="w-full mt-20">
         <form action="{{ route('quiz.submit') }}" method="POST" class="w-full relative px-[15px] flex flex-col pt-15 gap-15 max-w-screen-xl mx-auto items-center justify-center">
             @csrf
 
             @foreach ($quiz as $index => $question)
+            @php
+            $results = session('quiz_results');
+            $userAnswer = $results[$index]['user_answer'] ?? null;
+            $isCorrect = $results[$index]['is_correct'] ?? null;
+            $correctAnswer = $question['correct_answer'];
+            $isSubmitted = session('quiz_results') !== null;
+            @endphp
+
             @if ($quizType === 'multiple-choice')
             <!-- MULTIPLE CHOICE -->
-            <div class="rounded-[20px] w-full max-w-2xl flex flex-col gap-4 border-[1px] border-gray-300 p-[30px]">
+            <div class="rounded-[20px] w-full max-w-2xl flex flex-col gap-4 border-[1px] p-[30px] 
+                {{ $isSubmitted ? ($isCorrect ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50') : 'border-gray-300' }}">
                 <small class="text-sm w-full text-end font-medium">{{ $index + 1 }}/{{ count($quiz) }}</small>
                 <p class="text-lg w-full">{{ $question['question'] }}</p>
                 <div class="w-full flex flex-col gap-1 mt-6">
@@ -270,8 +278,13 @@
                     <ul class="grid w-full gap-6 md:grid-cols-2">
                         @foreach ($question['options'] as $optionIndex => $option)
                         <li>
-                            <input type="radio" id="q{{ $index }}_opt{{ $optionIndex }}" name="question_{{ $index }}" value="{{ $option }}" class="hidden peer" required />
-                            <label for="q{{ $index }}_opt{{ $optionIndex }}" class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-900">
+                            <input type="radio" id="q{{ $index }}_opt{{ $optionIndex }}" name="question_{{ $index }}" value="{{ $option }}"
+                                class="hidden peer" {{ $isSubmitted ? 'disabled' : 'required' }}
+                                {{ $userAnswer === $option ? 'checked' : '' }} />
+                            <label for="q{{ $index }}_opt{{ $optionIndex }}"
+                                class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base 
+                                {{ $isSubmitted ? 'cursor-not-allowed opacity-75' : 'cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium' }} 
+                                peer-checked:text-purple-900">
                                 <div class="block">
                                     <div class="w-full">{{ $option }}</div>
                                 </div>
@@ -279,73 +292,157 @@
                         </li>
                         @endforeach
                     </ul>
+
+                    @if($isSubmitted)
+                    <div class="flex items-center gap-3 mt-3">
+                        @if($isCorrect)
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-green-600" viewBox="0 -960 960 960">
+                            <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                        </svg>
+                        <p class="text-green-800 font-medium">Correct!</p>
+                        @else
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-red-600" viewBox="0 -960 960 960">
+                            <path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                        </svg>
+                        <p class="text-red-800 font-medium">Incorrect - Correct Answer: <span class="font-bold">{{ $correctAnswer }}</span></p>
+                        @endif
+                    </div>
+                    @endif
                 </div>
             </div>
 
             @elseif ($quizType === 'true-false')
             <!-- TRUE OR FALSE -->
-            <div class="rounded-[20px] w-full max-w-2xl flex flex-col gap-4 border-[1px] border-gray-300 p-[30px]">
+            <div class="rounded-[20px] w-full max-w-2xl flex flex-col gap-4 border-[1px] p-[30px]
+                {{ $isSubmitted ? ($isCorrect ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50') : 'border-gray-300' }}">
                 <small class="text-sm w-full text-end font-medium">{{ $index + 1 }}/{{ count($quiz) }}</small>
                 <p class="text-lg w-full">{{ $question['question'] }}</p>
                 <div class="w-full flex flex-col gap-1 mt-6">
                     <h3 class="mb-3 text-sm font-medium text-gray-700">Choose Answer</h3>
                     <ul class="grid w-full gap-6 md:grid-cols-2">
                         <li>
-                            <input type="radio" id="q{{ $index }}_true" name="question_{{ $index }}" value="True" class="hidden peer" required />
-                            <label for="q{{ $index }}_true" class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-900">
+                            <input type="radio" id="q{{ $index }}_true" name="question_{{ $index }}" value="True"
+                                class="hidden peer" {{ $isSubmitted ? 'disabled' : 'required' }}
+                                {{ $userAnswer === 'True' ? 'checked' : '' }} />
+                            <label for="q{{ $index }}_true"
+                                class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base 
+                                {{ $isSubmitted ? 'cursor-not-allowed opacity-75' : 'cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium' }} 
+                                peer-checked:text-purple-900">
                                 <div class="block">
                                     <div class="w-full">True</div>
                                 </div>
                             </label>
                         </li>
                         <li>
-                            <input type="radio" id="q{{ $index }}_false" name="question_{{ $index }}" value="False" class="hidden peer">
-                            <label for="q{{ $index }}_false" class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium peer-checked:text-purple-900">
+                            <input type="radio" id="q{{ $index }}_false" name="question_{{ $index }}" value="False"
+                                class="hidden peer" {{ $isSubmitted ? 'disabled' : '' }}
+                                {{ $userAnswer === 'False' ? 'checked' : '' }}>
+                            <label for="q{{ $index }}_false"
+                                class="inline-flex items-center justify-between w-full p-5 text-body bg-neutral-primary-soft border-1 border-default rounded-base 
+                                {{ $isSubmitted ? 'cursor-not-allowed opacity-75' : 'cursor-pointer peer-checked:hover:bg-purple-50 peer-checked:border-purple-300 peer-checked:bg-purple-50 hover:bg-neutral-secondary-medium' }} 
+                                peer-checked:text-purple-900">
                                 <div class="block">
                                     <div class="w-full">False</div>
                                 </div>
                             </label>
                         </li>
                     </ul>
+
+                    @if($isSubmitted)
+                    <div class="flex items-center gap-3 mt-3">
+                        @if($isCorrect)
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-green-600" viewBox="0 -960 960 960">
+                            <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                        </svg>
+                        <p class="text-green-800 font-medium">Correct!</p>
+                        @else
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-red-600" viewBox="0 -960 960 960">
+                            <path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                        </svg>
+                        <p class="text-red-800 font-medium">Incorrect - Correct Answer: <span class="font-bold">{{ $correctAnswer }}</span></p>
+                        @endif
+                    </div>
+                    @endif
                 </div>
             </div>
 
             @elseif ($quizType === 'identification')
             <!-- IDENTIFICATION -->
-            <div class="rounded-[20px] w-full max-w-2xl flex flex-col gap-4 border-[1px] border-gray-300 p-[30px]">
+            <div class="rounded-[20px] w-full max-w-2xl flex flex-col gap-4 border-[1px] p-[30px]
+                {{ $isSubmitted ? ($isCorrect ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50') : 'border-gray-300' }}">
                 <small class="text-sm w-full text-end font-medium">{{ $index + 1 }}/{{ count($quiz) }}</small>
                 <p class="text-lg w-full">{{ $question['question'] }}</p>
                 <div class="w-full flex flex-col gap-1 mt-6">
                     <h3 class="mb-3 text-sm font-medium text-gray-700">Type Answer</h3>
                     <div class="relative">
-                        <input type="text" name="question_{{ $index }}" class="block w-full p-3 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 shadow-xs placeholder:text-body" placeholder="Type your answer" required />
+                        <input type="text" name="question_{{ $index }}" value="{{ $userAnswer ?? '' }}"
+                            class="block w-full p-3 border text-sm rounded-base shadow-xs placeholder:text-body
+                            {{ $isSubmitted ? ($isCorrect ? 'bg-green-50 border-green-300 text-green-800' : 'bg-red-50 border-red-300 text-red-800') : 'bg-neutral-secondary-medium border-default-medium text-heading focus:ring-purple-600 focus:border-purple-600' }}"
+                            placeholder="Type your answer" {{ $isSubmitted ? 'disabled' : 'required' }} />
                     </div>
+
+                    @if($isSubmitted)
+                    <div class="flex items-center gap-3 mt-3">
+                        @if($isCorrect)
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-green-600" viewBox="0 -960 960 960">
+                            <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                        </svg>
+                        <p class="text-green-800 font-medium">Correct!</p>
+                        @else
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-red-600" viewBox="0 -960 960 960">
+                            <path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                        </svg>
+                        <p class="text-red-800 font-medium">Incorrect - Correct Answer: <span class="font-bold">{{ $correctAnswer }}</span></p>
+                        @endif
+                    </div>
+                    @endif
                 </div>
             </div>
 
             @elseif ($quizType === 'fill-blank')
             <!-- FILL IN THE BLANKS -->
-            <div class="rounded-[20px] w-full max-w-2xl flex flex-col gap-4 border-[1px] border-gray-300 p-[30px]">
+            <div class="rounded-[20px] w-full max-w-2xl flex flex-col gap-4 border-[1px] p-[30px]
+                {{ $isSubmitted ? ($isCorrect ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50') : 'border-gray-300' }}">
                 <small class="text-sm w-full text-end font-medium">{{ $index + 1 }}/{{ count($quiz) }}</small>
                 <p class="text-lg w-full">{{ $question['question'] }}</p>
                 <div class="w-full flex flex-col gap-1 mt-6">
                     <h3 class="mb-3 text-sm font-medium text-gray-700">Fill in the blank</h3>
                     <div class="relative">
-                        <input type="text" name="question_{{ $index }}" class="block w-full p-3 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-purple-600 focus:border-purple-600 shadow-xs placeholder:text-body" placeholder="Type your answer" required />
+                        <input type="text" name="question_{{ $index }}" value="{{ $userAnswer ?? '' }}"
+                            class="block w-full p-3 border text-sm rounded-base shadow-xs placeholder:text-body
+                            {{ $isSubmitted ? ($isCorrect ? 'bg-green-50 border-green-300 text-green-800' : 'bg-red-50 border-red-300 text-red-800') : 'bg-neutral-secondary-medium border-default-medium text-heading focus:ring-purple-600 focus:border-purple-600' }}"
+                            placeholder="Type your answer" {{ $isSubmitted ? 'disabled' : 'required' }} />
                     </div>
+
+                    @if($isSubmitted)
+                    <div class="flex items-center gap-3 mt-3">
+                        @if($isCorrect)
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-green-600" viewBox="0 -960 960 960">
+                            <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                        </svg>
+                        <p class="text-green-800 font-medium">Correct!</p>
+                        @else
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-red-600" viewBox="0 -960 960 960">
+                            <path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                        </svg>
+                        <p class="text-red-800 font-medium">Incorrect - Correct Answer: <span class="font-bold">{{ $correctAnswer }}</span></p>
+                        @endif
+                    </div>
+                    @endif
                 </div>
             </div>
             @endif
             @endforeach
 
             <!-- SUBMIT BUTTON -->
+            @if(!session('quiz_results'))
             <div class="flex flex-col mb-5 gap-3 items-center justify-center text-center">
                 <p>Are you done with your quiz? Submit now to get the result</p>
                 <button type="submit" class="text-white bg-purple-600 box-border border border-transparent hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Submit Quiz</button>
             </div>
+            @endif
         </form>
     </section>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Close modal functionality

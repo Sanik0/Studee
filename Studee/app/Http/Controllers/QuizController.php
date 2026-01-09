@@ -199,7 +199,7 @@ class QuizController extends Controller
         return $quiz;
     }
 
-    public function show()
+    public function show(Request $request)
     {
         $quiz = session('current_quiz');
         $quizType = session('quiz_type');
@@ -208,9 +208,13 @@ class QuizController extends Controller
             return redirect()->route('home')->withErrors(['general' => 'No quiz found. Please generate a quiz first.']);
         }
 
+        // Clear results if retaking
+        if ($request->has('retake')) {
+            session()->forget(['quiz_results', 'correct_count']);
+        }
+
         return view('quiz', compact('quiz', 'quizType'));
     }
-
     private function extractPdfText($file)
     {
         $parser = new PdfParser();
