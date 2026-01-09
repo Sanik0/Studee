@@ -189,7 +189,7 @@
     <!-- FORMS -->
     <section class="w-full justify-center align-center flex px-[15px] py-[50px]">
         <!-- SINGLE COMBINED FORM -->
-        <form action="{{ route('quiz.generate') }}" method="POST" enctype="multipart/form-data" class="w-full max-w-screen-sm gap-[20px] justify-center items-end flex flex-col">
+        <form id="quizForm" action="{{ route('quiz.generate') }}" method="POST" enctype="multipart/form-data" class="w-full max-w-screen-sm gap-[20px] justify-center items-end flex flex-col">
             @csrf
 
             <!-- Hidden input for quiz type -->
@@ -318,6 +318,21 @@
                 </div>
             </div>
         </form>
+        <!-- GENERATING -->
+        <div id="loadingSection" class="w-full max-w-screen-sm flex-col items-center justify-center px-[15px] hidden">
+            <dotlottie-player
+                src="{{ asset('lottie/Ai-powered marketing tools abstract.lottie') }}"
+                autoplay
+                loop
+                class="md:w-[350px] lg:w-[350px] w-[300px] md:h-[350px] lg:h-[350px]"></dotlottie-player>
+            <div class="flex justify-between mb-1 w-full">
+                <span class="text-sm font-medium text-body">Generating your quiz...hang tight!</span>
+                <span id="progressPercent" class="text-sm font-medium text-body">0%</span>
+            </div>
+            <div class="w-full bg-neutral-quaternary rounded-full h-3">
+                <div id="progressBar" class="bg-purple-600 h-3 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+        </div>
     </section>
     <!-- HERO -->
     <section class="bg-neutral-primary">
@@ -1692,6 +1707,40 @@
             });
         }
     });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const quizForm = document.getElementById('quizForm');
+    const loadingSection = document.getElementById('loadingSection');
+    const generateBtn = document.getElementById('generateBtn');
+    
+    // Your existing code...
+    
+    // Handle form submission
+    quizForm.addEventListener('submit', function(e) {
+        // Show loading, hide form
+        quizForm.classList.add('hidden');
+        loadingSection.classList.remove('hidden');
+        loadingSection.classList.add('flex');
+        
+        // Animate progress bar
+        let progress = 0;
+        const progressBar = document.getElementById('progressBar');
+        const progressPercent = document.getElementById('progressPercent');
+        
+        const interval = setInterval(() => {
+            if (progress < 90) {
+                progress += Math.random() * 10;
+                if (progress > 90) progress = 90;
+                progressBar.style.width = progress + '%';
+                progressPercent.textContent = Math.round(progress) + '%';
+            }
+        }, 300);
+        
+        // Store interval in case we need to clear it
+        window.loadingInterval = interval;
+    });
+});
 </script>
 
 </html>
