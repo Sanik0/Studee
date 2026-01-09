@@ -84,7 +84,11 @@ class QuizController extends Controller
             }
 
             // Store quiz in session for display
-            session(['current_quiz' => $quiz, 'quiz_type' => $quizType]);
+            session([
+                'current_quiz' => $quiz,
+                'quiz_type' => $quizType,
+                'quiz_title' => 'Quiz on ' . ucfirst($quizType) . ' - ' . date('M d, Y')
+            ]);
             session()->forget(['quiz_results', 'correct_count']); // Clear old results
 
             return redirect()->route('quiz.show');
@@ -103,8 +107,8 @@ class QuizController extends Controller
             throw new \Exception('OpenRouter API key not configured');
         }
 
-       $prompts = [
-                'multiple-choice' => "Based on the following content, generate exactly 1 multiple-choice question in a JSON array with 4 options.
+        $prompts = [
+            'multiple-choice' => "Based on the following content, generate exactly 1 multiple-choice question in a JSON array with 4 options.
 
             [
             {
@@ -118,7 +122,7 @@ class QuizController extends Controller
 
             Return ONLY the JSON array.",
 
-                'true-false' => "Based on the following content, generate exactly 1 true/false question in a JSON array.
+            'true-false' => "Based on the following content, generate exactly 1 true/false question in a JSON array.
 
             [{\"question\": \"Statement\", \"correct_answer\": \"True\"}]
 
@@ -126,7 +130,7 @@ class QuizController extends Controller
 
             Return ONLY the JSON array.",
 
-                'identification' => "Based on the following content, generate exactly 1 identification question in a JSON array.
+            'identification' => "Based on the following content, generate exactly 1 identification question in a JSON array.
 
             [{\"question\": \"Question\", \"correct_answer\": \"Answer\"}]
 
@@ -134,7 +138,7 @@ class QuizController extends Controller
 
             Return ONLY the JSON array.",
 
-                'fill-blank' => "Based on the following content, generate exactly 1 fill-in-the-blank question in a JSON array. Use ___ for blank.
+            'fill-blank' => "Based on the following content, generate exactly 1 fill-in-the-blank question in a JSON array. Use ___ for blank.
 
             [{\"question\": \"Statement with ___\", \"correct_answer\": \"Answer\"}]
 
@@ -180,7 +184,7 @@ class QuizController extends Controller
         $responseText = preg_replace('/```json\s*|\s*```/', '', $responseText);
         $responseText = preg_replace('/```\s*|\s*```/', '', $responseText);
         $responseText = trim($responseText);
-        
+
         // Find the first complete JSON array
         if (preg_match('/\[[\s\S]*?\{[\s\S]*?\}[\s\S]*?\]/', $responseText, $matches)) {
             $responseText = $matches[0];
@@ -254,36 +258,36 @@ class QuizController extends Controller
         return $text;
     }
 
-   public function submit(Request $request)
-{
-    $quiz = session('current_quiz');
-    $quizType = session('quiz_type');
-    
-    if (!$quiz) {
-        return redirect()->route('home')->withErrors(['general' => 'No quiz found.']);
-    }
-    
-    $results = [];
-    $correctCount = 0;
-    
-    foreach ($quiz as $index => $question) {
-        $userAnswer = $request->input("question_{$index}");
-        $correctAnswer = $question['correct_answer'];
-        $isCorrect = strtolower(trim($userAnswer)) === strtolower(trim($correctAnswer));
-        
-        if ($isCorrect) {
-            $correctCount++;
+    public function submit(Request $request)
+    {
+        $quiz = session('current_quiz');
+        $quizType = session('quiz_type');
+
+        if (!$quiz) {
+            return redirect()->route('home')->withErrors(['general' => 'No quiz found.']);
         }
-        
-        $results[] = [
-            'question' => $question,
-            'user_answer' => $userAnswer,
-            'is_correct' => $isCorrect
-        ];
+
+        $results = [];
+        $correctCount = 0;
+
+        foreach ($quiz as $index => $question) {
+            $userAnswer = $request->input("question_{$index}");
+            $correctAnswer = $question['correct_answer'];
+            $isCorrect = strtolower(trim($userAnswer)) === strtolower(trim($correctAnswer));
+
+            if ($isCorrect) {
+                $correctCount++;
+            }
+
+            $results[] = [
+                'question' => $question,
+                'user_answer' => $userAnswer,
+                'is_correct' => $isCorrect
+            ];
+        }
+
+        session(['quiz_results' => $results, 'correct_count' => $correctCount]);
+
+        return redirect()->route('quiz.show');
     }
-    
-    session(['quiz_results' => $results, 'correct_count' => $correctCount]);
-    
-    return redirect()->route('quiz.show');
-}
 }
